@@ -5,5 +5,5 @@
 IBM Cloud Schematics Service
 
     {: .navgroup id="reference"}
-    schematics-service-cli.md 
+    cli-reference.md 
     {: .navgroup-end}
