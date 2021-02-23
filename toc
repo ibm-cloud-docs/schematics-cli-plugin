@@ -1,0 +1,9 @@
+{:navgroup: .navgroup}
+{:topicgroup: .topicgroup}
+
+{: .toc subcollection="schematics-cli-plugin" audience="compute" href="/docs/schematics-cli-plugin/schematics-cli-plugin-schematics-service-cli" path="schematics-cli-plugin"}
+IBM Cloud Schematics Service
+
+    {: .navgroup id="reference"}
+    schematics-service-cli.md 
+    {: .navgroup-end}
