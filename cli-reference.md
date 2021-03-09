@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-02"
+lastupdated: "2021-03-09"
 
 keywords: schematics command line reference, schematics commands, schematics command line, schematics reference, command line
 
@@ -27,7 +27,7 @@ subcollection: schematics
 # {{site.data.keyword.bplong_notm}} CLI	
 {: #schematics-cli-reference}	
 
-Refer to these commands when you want to automate the provisioning of {{site.data.keyword.cloud_notm}} resources. 	
+Refer to these commands when you want to automate the provisioning of {{site.data.keyword.cloud}} resources. 	
 {: shortdesc}	
 
 To install the CLI, see [Setting up the CLI](/docs/schematics?topic=schematics-setup-cli). 	
@@ -54,6 +54,7 @@ ibmcloud schematics help
 {: pre}
 
 </br>
+
 **Command options:** none 
 
 ### `ibmcloud schematics version`
@@ -62,13 +63,33 @@ ibmcloud schematics help
 List the version of the Terraform command line and {{site.data.keyword.cloud_notm}} Provider plug-in for Terraform that the {{site.data.keyword.bpshort}} command line uses. 
 {: shortdesc}
 
+**Syntax**
+
+```
+ibmcloud schematics version [--output] <OUTPUT> [--json] <JSON_FILE>
+```
+{: pre}
+
+**Example**
+
 ```
 ibmcloud schematics version
 ```
 {: pre}
 
 </br>
-**Command options:** none
+
+**Command options:** 
+
+<dl>
+<dt><code>--json <em>JSON</em></code>, <code>-j<em>JSON</em></code></dt>
+<dd>Deprecated. Prints the output in the JSON format.</code>.
+   </dd>
+
+<dt><code>--output <em>OUTPUT</em></code>, <code>-o<em>OUTPUT</em></code></dt>
+<dd>Optional. Specify the output format. Currently only `JSON` file format is supported.  </dd>
+
+</dl>
 
 
 ## Workspace commands	
@@ -91,6 +112,7 @@ ibmcloud schematics workspace action --id WORKSPACE_ID [--act-id ACTION_ID] [--j
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>
@@ -142,6 +164,7 @@ ibmcloud schematics workspace delete --id WORKSPACE_ID [--force]
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>
@@ -238,6 +261,7 @@ ibmcloud schematics workspace list [--limit LIMIT] [--offset OFFSET] [--json]
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>
@@ -563,6 +587,7 @@ ibmcloud schematics refresh --id WORKSPACE_ID [--json]
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>	
@@ -589,6 +614,7 @@ ibmcloud schematics state list --id WORKSPACE_ID
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>	
@@ -865,6 +891,7 @@ ibmcloud schematics workspace upload --id WORKSPACE_ID --file PATH_TO_FILE --tem
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>	
@@ -915,6 +942,7 @@ ibmcloud schematics apply --id WORKSPACE_ID [--target RESOURCE] [--var-file TFVA
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>	
@@ -960,6 +988,7 @@ ibmcloud schematics destroy --id WORKSPACE_ID [--target RESOURCE] [--force] [--j
 {: pre}
 
 </br>
+
 **Command options:** 
 
 <dl>	
@@ -994,6 +1023,7 @@ ibmcloud schematics logs --id WORKSPACE_ID [--act-id ACTION_ID]
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>	
@@ -1053,6 +1083,7 @@ ibmcloud schematics plan --id WORKSPACE_ID [--json]
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>	
@@ -1285,7 +1316,7 @@ The table describes the options of the flag.
 | Flag | Required / Optional | Description |
 | ----- | -------- | ------ |
 | `--id` or `-id` | Required | The Id of an action that you want to fetch. |
-| `--profile` or `-p` | Optional | The level of information fetched by the get method. |
+| `--profile` or `-p` | Optional | The level of information fetched by the get method. Supported values are `detailed`, and `summary`. The default value is `summary`. |
 | `--no-prompt` | Optional | Fetch this flag to stop interactive command line session, by prompting user for input a field value on terminal.
 | `--json` or `-j` | Optional | [Deprecated] Prints the output in JSON format. You can use `--output` flag. |
 | `--output` or `-o` | Optional | Specify the output format, supported format is JSON. |
@@ -1308,7 +1339,7 @@ ibmcloud schematics action list [--limit LIMIT] [--offset OFFSET] [--profile PRO
 | ----- | -------- | ------ |
 | `--limit` or `-l` | The maximum number of workspaces to list. Ignored if a negative number is set. The maximum limit is `200` and the default value is `-1`. |
 | `--offset` or `-m` | Offset in list, ignored if a negative number is set. The default value is `-1`. |
-| `--profile` or `-p` | Level of the information returned by the get method. |
+| `--profile` or `-p` | Level of the information returned by the get method. Supported values are `ids`, and `summary`. The default value is `summary`.|
 | `--json` or `-j` | [Deprecated] Prints the output in JSON format. You can use `--output` flag. |
 | `--output` or `-o` | Specify the output format, supported format is JSON. |
 {: caption="Schematics action list flags" caption-side="top"}
@@ -1477,7 +1508,7 @@ The table describes the options of the flag.
 | `--json` or `-j` | Optional | [Deprecated] Prints the output as JSON. Use `--output` JSON instead. |
 | `--no-prompt` | Optional | Set this flag to stop interactive command line session.|
 | `--output` or `-o` | Optional | Specify output format, only `JSON` format is supported.|
-| `--profile` or `-p` | Optional | The level of information fetched by the get method. |
+| `--profile` or `-p` | Optional | The level of information fetched by the get method. Supported values are `detailed`, and `summary`. The default value is `summary`.|
 {: caption="Schematics job get flags" caption-side="top"}
 
 ### `ibmcloud schematics job list`
@@ -1502,7 +1533,7 @@ You can retrieve the jobs by using the options described in the table.
 | `--limit` or `-l` | Optional | Maximum number of workspaces to list. Ignored if a negative number is set. The maximum limit is `200` and the default value is `-1`. |
 | `--no-prompt` | Optional | Set this flag to stop interactive command line session.|
 | `--offset` or `-m` | Optional | Offset in list, ignored if a negative number is set. The default value is `-1`. |
-| `--profile` or `-p` | Optional | Level of the information returned by the get method. |
+| `--profile` or `-p` | Optional | Level of the information returned by the get method. Supported values are `ids`, and `summary`. The default value is `summary`. |
 | `--json` or `-j` | Optional | [Deprecated] Prints the output in JSON format. You can use `--output` flag. |
 | `--output` or `-o` | Optional | Specify the output format, supported format is JSON. |
 | `--resource-type` or `-rt` | Required | Name of the resource either `workspace`, `actions`, or `controls`. |
@@ -1681,6 +1712,7 @@ ibmcloud schematics state pull --id WORKSPACE_ID --template TEMPLATE_ID
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>	
@@ -1712,6 +1744,7 @@ ibmcloud schematics workspace state show --id <WORKSPACE_ID> --options <FLAGS> -
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>
@@ -1740,32 +1773,31 @@ Moves an instance or resources from the Terraform state. For example, if you mov
 {: shortdesc}
 
 ```
-ibmcloud schematics workspace state mv --id <WORKSPACE_ID> --options <FLAGS> --address <PARAMETERS> --destination <DESTINATION>
+ibmcloud schematics workspace state mv --id <WORKSPACE_ID> --source <SOURCE>  --destination <DESTINATION> 
 ```
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>
-<dt><code>--id <em>WORKSPACE_ID</em></code></dt>
+<dt><code>--id or -i<em>WORKSPACE_ID</em></code></dt>
 <dd>Required. The unique identifier of the workspace for which you want to move an instance or resource. To find the ID of your workspace, run <code>ibmcloud schematics workspace list</code>.
    </dd>
 
-<dt><code>--options <em>FLAGS</em></code></dt>
-<dd>Optional. Enter the option flag that you want to move. </dd>
+<dt><code>--source or -s<em>SOURCE</em></code></dt>
+<dd>Optional. Enter the source address of an item to move. </dd>
 
-<dt><code>--address</code></dt>
-<dd>Optional. Provide the source address parameter for the command.   </dd>
 
-<dt><code>--destination</code></dt>
+<dt><code>--destination or -d</code></dt>
 <dd>Optional. Provide the destination parameter for the command.   </dd>
 
 </dl>
 
 **Example**
 ```
-ibmcloud schematics workspace state mv --id myworkspace-a1aa1a1a-a11a-11 --address null_resource.sleep 
+ibmcloud schematics workspace state mv --id myworkspace-a1aa1a1a-a11a-11 -s testsourceresource -d null_resource.sleep 
 ```
 {: pre}
 
@@ -1782,6 +1814,7 @@ ibmcloud schematics workspace state rm --id <WORKSPACE_ID> --options <FLAGS> --a
 {: pre}
 
 </br>
+
 **Command options:**
 
 <dl>
