@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-11"
+lastupdated: "2021-03-22"
 
 keywords: schematics command line reference, schematics commands, schematics command line, schematics reference, command line
 
@@ -27,10 +27,10 @@ subcollection: schematics
 # {{site.data.keyword.bplong_notm}} CLI	
 {: #schematics-cli-reference}	
 
-Refer to these commands when you want to automate the provisioning of {{site.data.keyword.cloud}} resources. 	
+Refer to these commands when you want to automate the provisioning of {{site.data.keyword.cloud}} resources.
 {: shortdesc}	
 
-To install the CLI, see [Setting up the CLI](/docs/schematics?topic=schematics-setup-cli). 	
+To install the CLI, see [Setting up the CLI](/docs/schematics?topic=schematics-setup-cli) and to setup {{site.data.keyword.bplong_notm}} plug-in, see [{{site.data.keyword.bpshort}} plug-in installation](/docs/schematics?topic=schematics-schematics-cli-reference#install-schematics-plugin)
 {: tip}
 
 As of 31 March 2020, the {{site.data.keyword.bpshort}} command syntax changed from `ibmcloud terraform` to `ibmcloud schematics`. You can continue to use `ibmcloud terraform` commands as an alias, but note that this alias might become unsupported in future command line versions. 
@@ -48,14 +48,31 @@ Use these general commands to find help and version information for the {{site.d
 View the supported {{site.data.keyword.bplong_notm}} command line commands. 
 {: shortdesc}
 
+**Syntax**
+
 ```
-ibmcloud schematics help
+ibmcloud schematics help [command]
 ```
 {: pre}
 
-</br>
+**Command options**
 
-**Command options:** none 
+<dl>
+
+<dt><code>help</code>, <code>-h</code></dt>
+<dd>Required. Lists the supported commands.</code></dd>
+
+<dt><code>command</code></dt>
+<dd>Optional. Specify the name of the command to fetch the command details.</dd>
+
+</dl>
+
+**Example**
+
+```
+ibmcloud schematics help -version
+```
+{: pre}
 
 ### `ibmcloud schematics version`
 {: #schematics-version}
@@ -70,26 +87,24 @@ ibmcloud schematics version [--output OUTPUT] [--json JSON_FILE]
 ```
 {: pre}
 
-**Example**
 
-```
-ibmcloud schematics version
-```
-{: pre}
-
-</br>
-
-**Command options:** 
+**Command options** 
 
 <dl>
 <dt><code>--json <em>JSON</em></code>, <code>-j <em>JSON</em></code></dt>
-<dd>Deprecated. Prints the output in the JSON format.</code>.
-   </dd>
+<dd>Deprecated. Prints the output in the JSON format.</code> </dd>
 
 <dt><code>--output <em>OUTPUT</em></code>, <code>-o <em>OUTPUT</em></code></dt>
 <dd>Optional. Specify the output format. Currently only `JSON` file format is supported.  </dd>
 
 </dl>
+
+**Example**
+
+```
+ibmcloud schematics version --output > "<Your_DIR_PATH/filename.json>"
+```
+{: pre}
 
 
 ## Workspace commands	
@@ -104,16 +119,17 @@ Review the commands that you can use to set up and work with your {{site.data.ke
 Retrieve all activities for a workspace, including the user ID of the person who initiated the action, the status, and a timestamp. 
 {: shortdesc}
 
-When you create a Terraform execution plan, or apply your Terraform template with {{site.data.keyword.bpshort}}, a {{site.data.keyword.bpshort}} action is automatically created and assigned an action ID. You can use the action ID to retrieve the logs of this action by using the [`ibmcloud schematics logs`](#schematics-logs) command.  
+When you create a Terraform execution plan, or apply your Terraform template with {{site.data.keyword.bpshort}}, a {{site.data.keyword.bpshort}} action is automatically created and assigned an action ID. You can use the action ID to retrieve the logs of this action by using the [`ibmcloud schematics logs`](#schematics-logs) command.
+
+**Syntax**
 
 ```
 ibmcloud schematics workspace action --id WORKSPACE_ID [--act-id ACTION_ID] [--json]
 ```
 {: pre}
 
-</br>
 
-**Command options:**
+**Command options**
 
 <dl>
 <dt><code>--id <em>WORKSPACE_ID</em></code>, <code>-i <em>WORKSPACE_ID</em></code></dt>
@@ -156,16 +172,16 @@ Decide if you want to delete the workspace, any associated resources, or both. T
 		<td>Delete workspace and the resources provisioned by workspace</td><td>True</td><td>True</td></tr>
 	<tr>
 		<td>Resources destroyed using command line or resource list, and want to delete workspace</td><td>True</td><td>False</td></tr>
-</table> <br>
+</table> 
+
+**Syntax**
 
 ```
 ibmcloud schematics workspace delete --id WORKSPACE_ID [--force]
 ```
 {: pre}
 
-</br>
-
-**Command options:**
+**Command options**
 
 <dl>
 <dt><code>--id <em>WORKSPACE_ID</em></code>, <code>-i <em>WORKSPACE_ID</em></code></dt>
@@ -190,19 +206,21 @@ ibmcloud schematics workspace delete --id myworkspace-a1aa1a1a-a11a-11
 Retrieve the details of an existing workspace, including the values of all input variables.	
 {: shortdesc}	
 
+**Syntax**
+
 ```
 ibmcloud schematics workspace get --id WORKSPACE_ID [--json]
 ```
 {: pre}
 
-**Command options:**
+**Command options**
  
-<dl>	
+<dl>
 <dt><code>--id <em>WORKSPACE_ID</em></code>, <code>-i <em>WORKSPACE_ID</em></code></dt>	
 <dd>Required. The unique identifier of the workspace, for which you want to retrieve the details. To find the ID of a workspace, run <code>ibmcloud schematics workspace list</code>.</dd>	
 <dt><code>--json</code>, <code>-j</code></dt>	
 <dd>Optional. Return the command line output in JSON format.</dd>	
-</dl>	
+</dl>
 
 **Example**
 
@@ -214,25 +232,23 @@ ibmcloud schematics workspace get --id myworkspace-a1aa1a1a-a11a-11 --json
 ### `ibmcloud schematics workspace import`
 {: #schematics-workspace-import}
 
-You can import the existing resource with an valid address from the workspace ID and import it into your Terraform state. You need to ensure one resource can be imported to only one Terraform resource address. Otherwise, you may see unwanted behavior from Terraform.
+You can import the existing resource with an valid address from the workspace ID and import it into your Terraform state. You need to ensure one resource can be imported to only one Terraform resource address. Otherwise, you may see unwanted behavior from {{site.data.keyword.bpshort}}.
 {: shortdesc}
 
+**Syntax**
+
 ```
-ibmcloud schematics workspace import --id WID --address resource.resource_name --resourceID terraform_resource_id
+ibmcloud schematics workspace import --id WID --address resource.resource_name --resourceID resource_id
 ```
 {: pre}
 
 </br>
 
-**Command options:**
+**Command options**
 
 <dl>
 <dt><code>--id <em>WID</em></code></dt>
-<dd>Required. The unique identifier of the workspace for which you want to import an instance or resource. To find the ID of your workspace, run <code>ibmcloud schematics workspace list</code>.
-   </dd>
-
-<dt><code>--options <em>FLAGS</em></code></dt>
-<dd>Optional. Enter the option flag that you want to import. </dd>
+<dd>Required. The unique identifier of the workspace for which you want to import an instance or resource. To find the ID of your workspace, run <code>ibmcloud schematics workspace list</code> </dd>
 
 <dt><code>--address</code></dt>
 <dd>Required. Provide the resource name you want to import. </dd>
@@ -243,26 +259,27 @@ ibmcloud schematics workspace import --id WID --address resource.resource_name -
 </dl>
 
 **Example**
+
 ```
 ibmcloud schematics workspace import --id WID --address ibm_iam_access_group.accgrp --resourceID AccessGroupId-xxxxxx-xxxx-xxx-xxx-xxxx
 ```
 {: pre}
 
 
-
 ### `ibmcloud schematics workspace list`	
-{: #schematics-workspace-list}	
+{: #schematics-workspace-list}
 
 List the workspaces in your {{site.data.keyword.cloud_notm}} account and optionally, show the details for your workspace.	
+
+**Syntax**
 
 ```
 ibmcloud schematics workspace list [--limit LIMIT] [--offset OFFSET] [--json]
 ```
 {: pre}
 
-</br>
 
-**Command options:**
+**Command options**
 
 <dl>
 <dt><code>--limit <em>LIMIT</em></code></dt>
@@ -279,7 +296,7 @@ ibmcloud schematics workspace list [--limit LIMIT] [--offset OFFSET] [--json]
 **Example** 
 
 ```
-ibmcloud schematics workspace list --json
+ibmcloud schematics workspace list --limit 10 --offset 20 --json
 ```
 {: pre}
 
@@ -294,12 +311,14 @@ Create an {{site.data.keyword.bplong_notm}} workspace that points to your Terraf
 To create a workspace, you must specify your workspace settings in a JSON file. Make sure that the JSON file follows the structure as outlined in this command. 
 {: note}
 
+**Syntax**
+
 ```
 ibmcloud schematics workspace new --file FILE_PATH [--state STATE_FILE_PATH] [--json]
 ```
 {: pre}
  
-**Command options:**
+**Command options**
 
 <dl>	
  <dt><code>--file <em>FILE_PATH</em></code>, <code>-f <em>FILE_PATH</em></code></dt>	
@@ -377,9 +396,9 @@ ibmcloud schematics workspace new --file FILE_PATH [--state STATE_FILE_PATH] [--
   ],
   "githubtoken": "&lt;github_personal_access_token&gt;"
 }
-</code></pre></br>
+</code></pre></dd></br>
 
-Now, in template_repo, you can also provide `url` with more parameters as shown in the block.
+Now, in template_repo, you can also provide `URL` with more parameters as shown in the block.
   <pre class="codeblock">	
   <code>"url": "https://github.com/IBM-Cloud/terraform-provider-ibm",
      "branch": "master;",
@@ -538,11 +557,10 @@ ibmcloud schematics workspace new --file myfile.json
 {: pre}
 
 
-
 ### `ibmcloud schemates workspace output`
 {: #schematics-output}
 
-Displays all the instance or resource output of the workspace. You can provide output `NAME`, to print only the value of that output.
+Displays all the instance or resource output of the workspace. You can provide output `NAME`, to print only the value of that output. 
 {: shortdesc}
 
 ```
@@ -552,7 +570,7 @@ ibmcloud schematics workspace output --id WORKSPACE_ID [--options FLAGS] [--name
 
 </br>
 
-**Command options:**
+**Command options**
 
 <dl>
 <dt><code>--id <em>WORKSPACE_ID</em></code></dt>
@@ -578,8 +596,10 @@ ibmcloud schematics workspace output --id myworkspace-asdff1a1a-42145-11 --name 
 ### `ibmcloud schematics refresh`
 {: #schematics-refresh}
 
-Perform a Schematics refresh action against your workspace. A refresh action validates the {{site.data.keyword.cloud_notm}} resources in your account against the state that is stored in the Terraform statefile of your workspace. If differences are found, the Terraform statefile is updated accordingly. 
+Perform a {{site.data.keyword.cloud_notm}} refresh action against your workspace. A refresh action validates the {{site.data.keyword.cloud_notm}} resources in your account against the state that is stored in the Terraform statefile of your workspace. If differences are found, the Terraform statefile is updated accordingly. 
 {: shortdesc}
+
+**Syntax**
 
 ```
 ibmcloud schematics refresh --id WORKSPACE_ID [--json]
@@ -588,11 +608,13 @@ ibmcloud schematics refresh --id WORKSPACE_ID [--json]
 
 </br>
 
-**Command options:**
+**Command options**
 
 <dl>	
 <dt><code>--id <em>WORKSPACE_ID</em></code>, <code>-i <em>WORKSPACE_ID</em></code></dt>	
 <dd>Required. The unique identifier of the workspace that you want to refresh. To find the ID of a workspace, run <code>ibmcloud schematics workspace list</code>.</dd>	
+<dt><code>--json</code>, <code>-j</code></dt>	
+<dd>Optional. Print the command line output in JSON format.</dd>
 </dl>	
 
 **Example**
@@ -608,6 +630,8 @@ ibmcloud schematics refresh --id myworkspace-a1aa1a1a-a11a-11
 List the {{site.data.keyword.cloud_notm}} resources that are documented in your Terraform statefile (`terraform.tfstate`).  
 {: shortdesc}	
 
+**Syntax**
+
 ```
 ibmcloud schematics state list --id WORKSPACE_ID
 ```
@@ -615,7 +639,7 @@ ibmcloud schematics state list --id WORKSPACE_ID
 
 </br>
 
-**Command options:**
+**Command options**
 
 <dl>	
 <dt><code>--id <em>WORKSPACE_ID</em></code></dt>	
@@ -636,6 +660,8 @@ ibmcloud schematics state list --id myworkspace-a1aa1a1a-a11a-11
 Manually marks an instance or resources as tainted, by forcing the resources to be recreated on the next apply. Taint modifies the state file, but not the infrastructure in your workspace. When you perform next plan the changes will show as recreated and in the next apply the change is implemented.
 {: shortdesc}
 
+**Syntax**
+
 ```
 ibmcloud schematics workspace taint --id WORKSPACE_ID [--options FLAGS] [--address PARAMETER]
 ```
@@ -643,7 +669,7 @@ ibmcloud schematics workspace taint --id WORKSPACE_ID [--options FLAGS] [--addre
 
 </br>
 
-**Command options:**
+**Command options**
 
 <dl>
 <dt><code>--id <em>WORKSPACE_ID</em></code></dt>
@@ -659,8 +685,9 @@ ibmcloud schematics workspace taint --id WORKSPACE_ID [--options FLAGS] [--addre
 </dl>
 
 **Example**
+
 ```
-ibmcloud schematics workspace taint --id myworkspace-asdff1a1a-42145-11 --address null_resource.sleep  
+ibmcloud schematics workspace taint --id myworkspace-lalalalalalala-11 --address null_resource.sleep  
 ```
 {: pre}
 
@@ -671,14 +698,15 @@ ibmcloud schematics workspace taint --id myworkspace-asdff1a1a-42145-11 --addres
 Manually marks an instance or resources as untainted, by forcing the resources to be restored on the next apply. When you perform next plan the changes will show as restored and in the next apply the change is implemented.
 {: shortdesc}
 
+**Syntax**
+
 ```
 ibmcloud schematics workspace untaint --id WORKSPACE_ID [--options FLAGS] [--address PARAMETER]
 ```
 {: pre}
 
-</br>
 
-**Command options:**
+**Command options**
 
 <dl>
 <dt><code>--id <em>WORKSPACE_ID</em></code></dt>
@@ -694,12 +722,11 @@ ibmcloud schematics workspace untaint --id WORKSPACE_ID [--options FLAGS] [--add
 </dl>
 
 **Example**
+
 ```
 ibmcloud schematics workspace untaint --id myworkspace-asdff1a1a-42145-11 --address null_resource.sleep  
 ```
 {: pre}
-
-
 
 ### `ibmcloud schematics workspace update`	
 {: #schematics-workspace-update}	
@@ -712,12 +739,14 @@ Update the details for an existing workspace, such as the workspace name, variab
 If you provided your Terraform template by uploading a tape archive file (`.tar`) and you want to update your template, you must use the [`ibmcloud schematics workspace upload`](#schematics-workspace-upload) command.
 {: note}
 
+**Syntax**
+
 ```
 ibmcloud schematics workspace update --file FILE_NAME --id WORKSPACE_ID [--json]
 ```
 {: pre}
 
-**Command options:**
+**Command options**
 
 <dl>	
   <dt><code>--file <em>FILE_NAME</em></code></dt>
@@ -885,6 +914,8 @@ Provide your Terraform template by uploading a tape archive file (`.tar`) to you
 Before you begin, make sure that you [created your workspace](#schematics-workspace-new) without a link to a GitHub or GitLab repository.
 {: important}
 
+**Syntax**
+
 ```
 ibmcloud schematics workspace upload --id WORKSPACE_ID --file PATH_TO_FILE --template TEMPLATE_ID [--output]
 ```
@@ -892,7 +923,7 @@ ibmcloud schematics workspace upload --id WORKSPACE_ID --file PATH_TO_FILE --tem
 
 </br>
 
-**Command options:**
+**Command options**
 
 <dl>	
  <dt><code>--id <em>WORKSPACE_ID</em></code></dt>	
@@ -901,15 +932,14 @@ ibmcloud schematics workspace upload --id WORKSPACE_ID --file PATH_TO_FILE --tem
 <dd>Required. Enter the full file path on your local machine where your `.tar` file is stored. </dd>	
  <dt><code>--template <em>TEMPLATE_ID</em></code></dt>	
 <dd>Required. The unique identifier of the Terraform template for which you want to show the content of the Terraform statefile. To find the ID of the template, run <code>ibmcloud schematics workspace get --id &lt;workspace_ID&gt;</code> and find the template ID in the <strong>Template Variables for:</strong> field of your command line output. </dd>
-
 <dt><code>--output</code></dt>
 <dd>Optional. Return the command line output in JSON format.</dd>
 </dl>
 
-**Example 1:**
+**Example**
 
 ```
-ibmcloud schematics workspace upload --id myworkspace-a1aa1a1a-a11a-11 --file /Users/myuser/Documents/mytar/vpc.tar --template 250d6e9f-d71b-4c
+ibmcloud schematics workspace upload --id myworkspace-a1aa1a1a-a11a-11 --file /Users/myuser/Documents/mytar/vpc.tar --template 25111111-0000-4c
 
 ```
 {: pre}
@@ -934,31 +964,29 @@ Your workspace must be in an **Inactive**,  **Active**, **Failed**, or **Stopped
 {: note}
 
 While your infrastructure code runs in {{site.data.keyword.bplong_notm}}, you cannot make any changes to your workspace.
-{: note}
+{: important}
+
+**Syntax**
 
 ```
 ibmcloud schematics apply --id WORKSPACE_ID [--target RESOURCE] [--var-file TFVARS_FILE_PATH] [--force] [--json]
 ```
 {: pre}
 
-</br>
 
-**Command options:**
+**Command options**
 
 <dl>	
  <dt><code>--id <em>WORKSPACE_ID</em></code>, <code>-i <em>WORKSPACE_ID</em></code></dt>	
-<dd>Required. The unique identifier of the workspace that points to the Terraform template in your source control repository that you want to apply in {{site.data.keyword.cloud_notm}}. To find the ID of your workspace, run <code>ibmcloud schematics workspace list</code>.</dd>	
- <dt><code>--force</code>, <code>-f</code></dt>	
-<dd>Optional. Force the execution of this command without user prompts. </dd>	
- <dt><code>--json</code>, <code>-j</code></dt>	
-<dd>Optional. Return the command line output in JSON format.</dd>	
-  
+<dd>Required. The unique identifier of the workspace that points to the Terraform template in your source control repository that you want to apply in {{site.data.keyword.cloud_notm}}. To find the ID of your workspace, run <code>ibmcloud schematics workspace list</code>.</dd>	  
 <dt><code>--target <em>RESOURCE</em></code>, <code>-t <em>RESOURCE</em></code></dt>
 <dd>Optional. Target the creation of a specific resource of your Terraform configuration file by entering the Terraform resource address, such as <code>ibm_is_instance.vm1</code>. All other resources that are defined in your configuration file remain uncreated or unupdated. To target the creation of multiple resources, use the following syntax: <code>--target &lt;resource1&gt; --target &lt;resource2&gt; </code>. If the targeted resource specifies the <code>count</code> attribute and no index is specified in the resource address, such as <code>ibm_is_instance.vm1[1]</code>, all instances that share the same resource name are targeted for creation. </dd>
-
 <dt><code>--var-file <em>TFVARS_FILE_PATH</em></code>, <code>--vf <em>TFVARS_FILE_PATH</em></code></dt>
 <dd>Optional. The file path to the <code>terraform.tfvars</code> file that you created on your local machine. Use this file to store sensitive information, such as the {{site.data.keyword.cloud_notm}} API key or credentials to connect to {{site.data.keyword.cloud_notm}} classic infrastructure in the format <code>&lt;key&gt;=&lt;value&gt;</code>. All key value pairs that are defined in this file are automatically loaded into Terraform when you initialize the Terraform CLI. To specify multiple <code>tfvars</code> files, specify <code>--var-file TFVARS_FILE_PATH1 --var-file TFVARS_FILE_PATH2</code>.</dd>
-
+<dt><code>--force</code>, <code>-f</code></dt>	
+<dd>Optional. Force the execution of this command without user prompts. </dd>	
+<dt><code>--json</code>, <code>-j</code></dt>	
+<dd>Optional. Return the command line output in JSON format.</dd>	
 </dl>	
 
 **Example**
@@ -982,25 +1010,25 @@ Use this command with caution. After you run the command, you cannot reverse the
 Your workspace must be in an **Active**, **Failed**, or **Stopped** state to perform a {{site.data.keyword.bpshort}} destroy action. 
 {: note}
 
+**Syntax**
+
 ```
 ibmcloud schematics destroy --id WORKSPACE_ID [--target RESOURCE] [--force] [--json]
 ```
 {: pre}
 
-</br>
 
-**Command options:** 
+**Command options** 
 
 <dl>	
  <dt><code>--id <em>WORKSPACE_ID</em></code>, <code>-i <em>WORKSPACE_ID</em></code></dt>	
 <dd>Required. The unique identifier of the workspace that points to the Terraform template in your source repository that specifies the {{site.data.keyword.cloud_notm}} resources that you want to remove. To find the ID of a workspace, run <code>ibmcloud schematics workspace list</code>.</dd>	
- <dt><code>--force</code>, <code>-f</code></dt>	
-<dd>Optional. Force the execution of this command without user prompts. </dd>	
- <dt><code>--json</code>, <code>-j</code></dt>	
-<dd>Optional. Return the command line output in JSON format.</dd>	
-
 <dt><code>--target <em>RESOURCE</em></code></dt>
 <dd>Optional. Target the deletion of a specific resource by entering the Terraform resource address, such as <code>ibm_is_instance.vm1</code>. All other resources in your workspace remain unchanged. To target the deletion of multiple resources, use the following syntax: <code>--target &lt;resource1&gt; --target &lt;resource2&gt; </code>. If the targeted resource specifies the <code>count</code> attribute and no index is specified in the resource address, such as <code>ibm_is_instance.vm1[1]</code>, all instances that share the same resource name are targeted for deletion. Also, if the targeted resource can only be deleted if dependent resources are deleted, such as a VPC can only be deleted if the attached subnet is deleted, then all dependent resources are targeted for deletion as well. </dd>
+<dt><code>--force</code>, <code>-f</code></dt>	
+<dd>Optional. Force the execution of this command without user prompts. </dd>	
+<dt><code>--json</code>, <code>-j</code></dt>	
+<dd>Optional. Return the command line output in JSON format.</dd>	
 
 </dl>	
 
@@ -1017,14 +1045,15 @@ ibmcloud schematics destroy --id myworkspace-a1aa1a1a-a11a-11 --json --target ib
 Retrieve the Terraform log files for a {{site.data.keyword.bpshort}} workspace or a specific action ID. Use the log files to troubleshoot Terraform template issues or issues that occur during the resource provisioning, modification, or deletion process. 
 {: shortdesc}	
 
+**Syntax**
+
 ```
 ibmcloud schematics logs --id WORKSPACE_ID [--act-id ACTION_ID]
 ```
 {: pre}
 
-</br>
 
-**Command options:**
+**Command options**
 
 <dl>	
 <dt><code>--id <em>WORKSPACE_ID</em></code>, <code>-i <em>WORKSPACE_ID</em></code></dt>	
@@ -1046,12 +1075,14 @@ ibmcloud schematics logs --id myworkspace-a1aa1a1a-a11a-11 --act-id 9876543121ab
 Retrieve a list of Terraform output values. You define output values in your Terraform template to include information that you want to make accessible for other Terraform templates.
 {: shortdesc}
 
+**Syntax**
+
 ```
 ibmcloud schematics output --id WORKSPACE_ID
 ```
 {: pre}
 
-**Command options:**
+**Command options**
 <dl>	
  <dt><code>--id <em>WORKSPACE_ID</em></code>, <code>-i <em>WORKSPACE_ID</em></code></dt>	
 <dd>Required. The unique identifier of the workspace for which you want to list Terraform output values. To find the ID of your workspace, run <code>ibmcloud schematics workspace list</code>.</dd>	
@@ -1077,14 +1108,15 @@ Your workspace must be in an **Inactive**, **Active**, **Failed**, or **Stopped*
 During the creation of the Terraform execution plan, you cannot make any changes to your workspace. 
 {: note}
 
+**Syntax**
+
 ```
 ibmcloud schematics plan --id WORKSPACE_ID [--json]
 ```
 {: pre}
 
-</br>
 
-**Command options:**
+**Command options**
 
 <dl>	
 <dt><code>--id <em>WORKSPACE_ID</em></code>, <code>-i <em>WORKSPACE_ID</em></code></dt>	
@@ -1103,9 +1135,6 @@ ibmcloud schematics plan --id myworkspace-a1aa1a1a-a11a-11 --json
 
 ## Action commands
 {: #schematics-action-commands}
-
-  The open beta release of Ansible support is now available in {{site.data.keyword.bplong_notm}} to IBM users. Contact your IBM Cloud Schematics Technical Offering Manager [Sai Vennam](mailto:svennam@us.ibm.com), if you are interested in getting early access to this beta offering. For more information, see [Beta limitations](/docs/schematics?topic=schematics-schematics-limitations#beta-limitations).
-  {: beta}
 
 Review the command that you want to create, update, list, delete and work with your {{site.data.keyword.bplong_notm}} actions.
 {: shortdesc}
@@ -1154,7 +1183,6 @@ If your hostname contains variables, you can provide in the `-input` argument wi
 Create an action by using {{site.data.keyword.bplong_notm}} to work with your {{site.data.keyword.bpshort}}. You can create an action by using following three methods:
 1. Payload file
 2. Interactive mode
-3. Supported flags
 {: shortdesc}
 
 **Payload file**
@@ -1200,11 +1228,19 @@ ibmcloud schematics action create --file testcreation.json
 
 **Interactive mode**
 
-You are prompted for the required values for the name, resource_group and location details to create an action in interactive mode. By default the action ID is created with minimal action that can be updated later by using update action CLI. You will prompt if the required fields are not present.
+You are prompted for the required values for the name, resource_group and location details to create an action in interactive mode. By default the action ID is created with minimal action that can be updated later by using update action CLI.
 {: shortdesc}
+
+**Syntax**
 
 ```
 ibmcloud schematics action create 
+```
+{: codeblock}
+
+You are prompted to `Enter name`, `Enter resource-group`, `Enter location`. You need to enter the value to view the output with the ID, name, resource group, and location with the user state.
+
+```
 Enter name> <ACTION_NAME>
 Enter resource-group> <RESOURCE_GROUP>
 Enter location> <GEOGRAPHY>
@@ -1215,17 +1251,20 @@ Enter location> <GEOGRAPHY>
 
 ```
 ibmcloud schematics action create 
+```
+{: codeblock}
+
+```
 Enter name> testaction1
 Enter resource-group> testrg1
 Enter location> us-south
 ```
 {: pre}
 
-You will receive the output with the ID, name, resource group, and location with the user state.
 
 **Supported flags**
 
-Create an action by using the flags mentioned in the syntax. 
+Create an action by using all the flags or required flags that are mentioned in the syntax. 
 {: shortdesc}
 
 
@@ -1247,10 +1286,10 @@ You will receive the output with the ID, name, resource group, and location with
 | ----- | -------- | ------ |
 | `--name` or `-n` | Required | The unique name of the action. |
 | `--resource-group` or `-r` | Required | The resource group name for an action. |
-| `--location,` or `-l` | Required | The geographic locations supported by {{site.data.keyword.bplong_notm}} service such as **us-south**, **us-east**, **eu-de**, **eu-gb**. |
+| `--location,` or `-l` | Required | The geographic locations supported by {{site.data.keyword.bplong_notm}} service such as **us-south/us-east/eu-de/eu-gb**. |
 | `--template` or `-tr` | Optional | The URL to the GIT repository that can be used to clone the template.|
 | `--template-type` or `-tt` | Optional | The type of source of template, such as `git_hub`.|
-| `--playbook-name` or `-pn` | Optional | Specify the playbook name. |
+| `--playbook-name` or `-pn` | Optional | Specify the name of playbook to execute from your Git repository. For example, `mytestplaybook.yml`.|
 | `--description` or `-d` | Optional | The short description of an action.|
 | `--github-token` or `-g` | Optional | The GitHub token value to access the private git repository. |
 | `--target-file` or `-tf` | Optional | The inventory hostnames of the multiple host applications such as web server, database server, Operating System, region, or network in `.ini` format. For more information, see [Inventory host groups](/docs/schematics?topic=schematics-schematics-cli-reference#inventory-host-grps).|
@@ -1287,7 +1326,7 @@ You will receive the output with the ID, name, resource group, and location with
 | `--name` or `-n` | Required | The unique name of the action. |
 | `--resource-group` or `-r` | Required | The resource group name for an action. |
 | `--tags` or `t` | Optional | The tag list.|
-| `--location,` or `-l` | Required | The geographic locations supported by {{site.data.keyword.bplong_notm}} service such as **us-south**, **us-east**, **eu-de**, **eu-gb**. |
+| `--location,` or `-l` | Required | The geographic locations supported by {{site.data.keyword.bplong_notm}} service such as **us-south/us-east/eu-de/eu-gb**. |
 | `--description` or `-d` | Optional | The short description of an action.|
 | `--templates` or `-tr` | Optional | The ordered list of Git template repositories.|
 | `--template-type` or `-tt` | Optional | The type of source of template, such as `git_hub`.|
@@ -1454,12 +1493,12 @@ The table describes the options of the flag.
 
 | Flag | Required / Optional | Description |
 | ----- | -------- | ------ |
-| `--command-object` or `-c` | Required | The name of the Schematics automation resource. Valid values are `action`. |
+| `--command-object` or `-c` | Required | The name of the Schematics automation resource. Valid values are `action`, `workspace`, . |
 | `--command-object-id` or `-cid` | Required | The ID of the Schematics automation resource on which you want to run job. |
 | `--command-name,` or `-n` | Required | The Schematics job command name. |
 | `--command-options` or `-co` | Optional | The command line options for the command.|
 | `--file` or `-f` | Optional | The payload file name. |
-| `--playbook-name` or `-pn` | Optional | Specify the playbook name. |
+| `--playbook-name` or `-pn` | Optional | Specify the name of playbook to execute from your Git repository. For example, `mytestplaybook.yml`. |
 | `--input` or `-i` | Optional | The input variables for the action. This flag can be set multiple times. **Note** The format must be as `--input foo=bar` or in JSON file. |
 | `--input-file` or `-I` | Optional | The input variables for the action. You need to provide the JSON file path that contains input variables.|
 | `--env` or `-e` | Optional | The environment variables for the action. This flag can be set multiple times. **Note** The format must be as `--env-variables foo=bar`. |
@@ -1586,13 +1625,13 @@ You can fetch a job by using the options described in the table.
 ## Enable BYOK or KYOK commands
 {: kms-commands}
 
-You can use your encryption keys from key management services (KMS), {{site.data.keyword.keymanagementservicelong_notm}}(BYOK), and {{site.data.keyword.cloud_notm}} {{site.data.keyword.hscrypto}} (KYOK) to encrypt and secure data stored in {{site.data.keyword.bpshort}}. For more information, about how to protect sensitive data in {{site.data.keyword.bpshort}}, see [protecting your sensitive data in {{site.data.keyword.bpshort}}](/docs/schematics?topic=schematics-secure-data#data-encryption).
+You can use your encryption keys from key management services (KMS), {{site.data.keyword.keymanagementservicelong_notm}}(BYOK), and {{site.data.keyword.cloud_notm}} {{site.data.keyword.hscrypto}} (KYOK) to encrypt and secure data stored in {{site.data.keyword.bpshort}}. For more information, about how to protect sensitive data in {{site.data.keyword.bpshort}}, see [protecting your sensitive data in {{site.data.keyword.bpshort}}](/docs/schematics?topic=schematics-secure-data#data-storage).
 {: shortdesc}
 
 ### Prerequisites
 {: #key-prerequisites}
 
-You need to configure [service to service authorization](/docs/schematics?topic=schematics-secure-data#using-byok) to integrate BYOK, and KYOK in {{site.data.keyword.bpshort}} service. 
+You need to configure [service to service authorization](/docs/schematics?topic=schematics-secure-data#data-storage) to integrate BYOK, and KYOK in {{site.data.keyword.bpshort}} service.
 
 KMS setting is a one time settings. You need to open the [support ticket](/docs/get-support?topic=get-support-using-avatar) to update KMS settings.
 {: note}
@@ -1620,7 +1659,7 @@ ibmcloud schematics kms instance ls --location LOCATION_NAME --scheme ENCRYPTION
 ### `ibmcloud schematics kms enable`
 {: #schematics-kms-enable}
 
-Enable KMS to encrypt your data in the specific location. For more information, about enabling customer-managed keys for {{site.data.keyword.bpshort}}, see [enabling keys](/docs/schematics?topic=schematics-secure-data#using-byok). You can enable the KMS instances by using the options described in the table.
+Enable KMS to encrypt your data in the specific location. For more information, about enabling customer-managed keys for {{site.data.keyword.bpshort}}, see [enabling keys](/docs/schematics?topic=schematics-secure-data#data-storage). You can enable the KMS instances by using the options described in the table.
 
 **Syntax**
 
@@ -1695,7 +1734,7 @@ The `Commands` API supports:
 Select your region where the workspace is created, and use the following syntax to run the commands API.
 
 ```
-ibmcloud schematics commands --id WORKSPACE_ID [--options FLAGS] [--file JSON file]
+ibmcloud schematics workspace commands --id WORKSPACE_ID [--options FLAGS] [--file JSON file]
 ```
 
 **Command options**
@@ -1771,7 +1810,7 @@ ibmcloud schematics commands --id WORKSPACE_ID [--options FLAGS] [--file JSON fi
 **Example**
 
 ```
-ibmcloud schematics commands --id cli-sleepy-0bedc51f-c344-50 --file /<userdir>/Test.JSON
+ibmcloud schematics workspace commands --id cli-sleepy-0bedc51f-c344-50 --file /<userdir>/Test.JSON
 ```
 
 ## Terraform statefile commands
@@ -1796,7 +1835,7 @@ ibmcloud schematics state pull --id WORKSPACE_ID --template TEMPLATE_ID
 
 </br>
 
-**Command options:**
+**Command options**
 
 <dl>	
 <dt><code>--id <em>WORKSPACE_ID</em></code></dt>	
@@ -1814,7 +1853,6 @@ ibmcloud schematics state pull --id myworkspace-a1aa1a1a-a11a-11 --template a1aa
 {: pre}
 
 
-
 ### `ibmcloud schematics workspace state show`
 {: #schematics-workspace-show}
 
@@ -1828,7 +1866,7 @@ ibmcloud schematics workspace state show --id WORKSPACE_ID [--options FLAGS] [--
 
 </br>
 
-**Command options:**
+**Command options**
 
 <dl>
 <dt><code>--id <em>WORKSPACE_ID</em></code></dt>
@@ -1862,7 +1900,7 @@ ibmcloud schematics workspace state mv --id WORKSPACE_ID [--source SOURCE]  [--d
 
 </br>
 
-**Command options:**
+**Command options**
 
 <dl>
 <dt><code>--id or -i<em>WORKSPACE_ID</em></code></dt>
@@ -1898,7 +1936,7 @@ ibmcloud schematics workspace state rm --id WORKSPACE_ID [--options FLAGS] [--ad
 
 </br>
 
-**Command options:**
+**Command options**
 
 <dl>
 <dt><code>--id <em>WORKSPACE_ID</em></code></dt>
