@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-31"
+lastupdated: "2021-04-06"
 
 keywords: schematics command line reference, schematics commands, schematics command line, schematics reference, command line
 
@@ -60,7 +60,7 @@ ibmcloud schematics help [command]
 <dl>
 
 <dt><code>help</code>, <code>-h</code></dt>
-<dd>Required. Lists the supported commands.</code></dd>
+<dd>Required. Lists the supported commands.</dd>
 
 <dt><code>command</code></dt>
 <dd>Optional. Specify the name of the command to fetch the command details.</dd>
@@ -92,7 +92,7 @@ ibmcloud schematics version [--output OUTPUT] [--json JSON_FILE]
 
 <dl>
 <dt><code>--json <em>JSON</em></code>, <code>-j <em>JSON</em></code></dt>
-<dd>Deprecated. Prints the output in the JSON format.</code> </dd>
+<dd>Deprecated. Prints the output in the JSON format.</dd>
 
 <dt><code>--output <em>OUTPUT</em></code>, <code>-o <em>OUTPUT</em></code></dt>
 <dd>Optional. Specify the output format. Currently only `JSON` file format is supported.  </dd>
@@ -394,7 +394,6 @@ ibmcloud schematics workspace new --file FILE_PATH [--state STATE_FILE_PATH] [--
       ]
     }
   ],
-  "githubtoken": "&lt;github_personal_access_token&gt;"
 }
 </code></pre></dd></br>
 
@@ -495,7 +494,7 @@ Example JSON for uploading a `.tar` file later:
    </tr>
      <tr>
        <td><code>&lt;terraform_version&gt;</code></td>
-       <td>Optional. The Terraform version that you want to use to run your Terraform code. Enter <code>Terraform_v0.12</code> to use Terraform version 0.12, and <code>terraform_v0.11</code> to use Terraform version 0.11. If no value is specified, the Terraform config files are run with Terraform version 0.11. Make sure that your Terraform config files are compatible with the Terraform version that you specify.</td>
+       <td>Optional.  The Terraform version that you want to use to run your Terraform code. Enter <code>Terraform_v0.12</code> to use Terraform version 0.12, and similarly terraform_v0.11, terraform_v0.13, terraform_v0.14. Make sure that your Terraform config files are compatible with the Terraform version that you specify.</td>
      </tr>
     <tr>
        <td><code>&lt;location&gt;</code></td>
@@ -545,6 +544,8 @@ Example JSON for uploading a `.tar` file later:
       </tbody></table></dd>
 <dt><code>--state <em>STATE_FILE_PATH</em></code></dt>
 <dd>Optional. The relative path to an existing Terraform statefile on your local machine. To create the Terraform statefile: <ol><li>Show the content of an existing Terraform statefile by using the [`ibmcloud terraform state pull`](#state-pull) command.</li><li>Copy the content of the statefile from your command line output in to a file on your local machine that is named <code>terraform.tfstate</code>.</li><li>Use the relative path to the file in the <code>--state</code> command parameter.</li></ol></dd>
+<dt><code>--github-token<em>FUNCTIONAL_GIT_KEY</em></code></dt>
+<dd>Optional. Use the functional personal access tokens for HTTPS Git operations. For example, <code>--github-token ${FUNCTIONAL_GIT_KEY}</code>.</dd>
 <dt><code>--json</code>, <code>-j</code></dt>	
 <dd>Optional. Print the command line output in JSON format.</dd>	
 </dl>	
@@ -1187,7 +1188,7 @@ Create an {{site.data.keyword.bplong_notm}} action to run on a single target or 
 For more information, about the Schematics action state, see [Schematics action state diagram](/docs/schematics?topic=schematics-action-setup#action-state-diagram).
 {: shortdesc}
 
-You cannot update the location and region once an action is created.
+You cannot update the location and region once an action is created. Also, make sure your IP addresses are in the [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
 {: important}
 
 **Syntax**
@@ -1677,7 +1678,6 @@ ibmcloud schematics job delete --id us-east.JOB.yourjob_ID_1231
 ```
 {: pre}
 
-00000
 ## Resource query commands
 {: #rq-commands}
 
