@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-04-19"
+lastupdated: "2021-04-20"
 
 keywords: schematics command-line reference, schematics commands, schematics command line, schematics reference, command line
 
@@ -307,74 +307,77 @@ ibmcloud schematics workspace new --file FILE_NAME --state STATE_FILE_PATH [--gi
 
 You can create the JSON as shared in the `example.json` file for workspace creation and pass the file path along with the file name in `--file` flag. The description of all the parameters of example.json is described in the table. 
 
+You need to replace the `<...>` placeholders with the actual values. For example, `"<workspace_name>"` as "testworkspace".
+{: note}
+
 **example.json**
 
 ```
 {
-  "name": "&lt;workspace_name&gt;>",
+  "name": "<workspace_name>",
   "type": [
-    "&lt;terraform_version&gt;"
+    "<terraform_version>"
   ],
-  "location": "&lt;location&gt;",
-  "description": "&lt;workspace_description&gt;",
+  "location": "<location>",
+  "description": "<workspace_description>",
   "tags": [],
   "template_repo": {
-    "url": "&lt;github_source_repo_url&gt;"
+    "url": "<github_source_repo_url>"
   },
   "template_data": [
     {
       "folder": ".",
-      "type": "&lt;terraform_version&gt;",
+      "type": "<terraform_version>",
       "env_values":[
       {
-        "VAR1":"&lt;val1&gt;"
+        "VAR1":"<val1>"
       },
       {
-        "VAR2":"&lt;val2&gt;"
+        "VAR2":"<val2>"
       }
       ],
       "variablestore": [
         {
-          "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+          "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "string",
           "secure": true,
-          "description":"&lt;description&gt;"
+          "description":"<description>"
         },
         {
-          "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+          "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "bool",
           "secure": false,
-          "description":"&lt;description&gt;"
+          "description":"<description>"
         },
     {
-          "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+          "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "list(string);",
           "secure": false,
-         "description":"&lt;description&gt;"
+         "description":"<description>"
         },
     {
-          "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+          "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "map(number)",
           "secure": false,
-          "description":"&lt;description&gt;"
+          "description":"<description>"
         },
     {
-          "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+          "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "tuple([string, list(string), number, bool])",
           "secure": false,
-         "description":"&lt;description&gt;"
+         "description":"<description>"
         },
     {
-          "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+          "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "any",
           "secure": false,
-          "description":"&lt;description&gt;"
+          "description":"<description>"
         }
       ]
     }
@@ -387,70 +390,70 @@ You can create the JSON as shared in the `example.json` file for workspace creat
 
 ```
 {	
-  "name": "&lt;workspace_name&gt;",
+  "name": "<workspace_name>",
   "type": [
-    "&lt;terraform_version&gt;"
+    "<terraform_version>"
   ],
-  "location": "&lt;location&gt;",
-  "description": "&lt;workspace_description&gt;",
+  "location": "<location>",
+  "description": "<workspace_description>",
   "tags": [],
   "template_repo": {
-     "url": "&lt;github_source_repo_url&gt;"
+     "url": "<github_source_repo_url>"
    },
   "template_data": [
     {
       "folder": ".",
-      "type": "&lt;terraform_version&gt;",
+      "type": "<terraform_version>",
       "env_values":[
       {
-        "VAR1":"&lt;val1&gt;"
+        "VAR1":"<val1>"
       },
       {
-        "VAR2":"&lt;val2&gt;"
+        "VAR2":"<val2>"
       }
       ],
       "variablestore": [
         {
-          "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+          "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "string",
           "secure": true,
-	        "description":"&lt;description&gt;"
+	        "description":"<description>"
         },
         {
-          "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+          "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "bool",
           "secure": false,
-	        "description":"&lt;description&gt;"
+	        "description":"<description>"
         },
       	{
-          "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+          "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "list(string)",
           "secure": false,
-	        "description":"&lt;description&gt;"
+	        "description":"<description>"
         },
 	      {
-	        "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+	        "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "map(number)",
           "secure": false,
-	        "description":"&lt;description&gt;"
+	        "description":"<description>"
         },
 	      {
-	       "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+	       "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "tuple([string, list(string), number, bool])",
           "secure": false,
-	        "description":"&lt;description&gt;"
+	        "description":"<description>"
         },
 	      {
-	        "name": "&lt;variable_name_x&gt;",
-          "value": "&lt;variable_value_x&gt;",
+	        "name": "<variable_name_x>",
+          "value": "<variable_value_x>",
           "type": "any",
           "secure": false,
-	        "description":"&lt;description&gt;"
+	        "description":"<description>"
         }
       ]
     }
@@ -480,7 +483,7 @@ You can create the JSON as shared in the `example.json` file for workspace creat
   <tr>
    <td>`location`</td>
    <td>Optional</td>
-   <td>Enter the location where you want to create your workspace. The location determines where your {{site.data.keyword.bpshort}} actions run and where your workspace data is stored. If you do not enter a location, {{site.data.keyword.bpshort}} determines the location based on the {{site.data.keyword.cloud_notm}} region that you targeted. To view the region that you targeted, run `ibmcloud target --output json` and look at the `region` field. To target a different region, run `ibmcloud target -r &lt;region&gt;`. If you enter a location, make sure that the location matches the {{site.data.keyword.cloud_notm}} region that you targeted.</td>
+   <td>Enter the location where you want to create your workspace. The location determines where your {{site.data.keyword.bpshort}} actions run and where your workspace data is stored. If you do not enter a location, {{site.data.keyword.bpshort}} determines the location based on the {{site.data.keyword.cloud_notm}} region that you targeted. To view the region that you targeted, run `ibmcloud target --output json` and look at the `region` field. To target a different region, run `ibmcloud target -r <region>`. If you enter a location, make sure that the location matches the {{site.data.keyword.cloud_notm}} region that you targeted.</td>
    </tr>
    <tr>
    <td>`description`</td>
@@ -740,44 +743,47 @@ ibmcloud schematics workspace update --id WORKSPACE_ID --file FILE_NAME [--githu
 
 You can create the JSON as shared in the `example.json` file for workspace update and pass the file path along with the file name in `--file` flag. The description of all the parameters of example.json is described in the table. 
 
+You need to replace the `<...>` placeholders with the actual values. For example, `"<workspace_name>"` as "testworkspace".
+{: note}
+
 **example.json**
 
 ```
 {
-  "name": "&lt;workspace_name&gt;",
-  "type": "&lt;terraform_version&gt;",
-  "description": "&lt;workspace_description&gt;",
+  "name": "<workspace_name>",
+  "type": "<terraform_version>",
+  "description": "<workspace_description>",
   "tags": [],
-  "resource_group": "&lt;resource_group&gt;",
+  "resource_group": "<resource_group>",
   "workspace_status": {
-    "frozen": "&lt;true_or_false&gt;"
+    "frozen": "<true_or_false>"
   },
   "template_repo": { 
-    "url": "&lt;source_repo_url&gt;"
+    "url": "<source_repo_url>"
   },
   "template_data": [
     {
       "folder": ".",
-      "type": "&lt;terraform_version&gt;",
+      "type": "<terraform_version>",
       "env_values":[
       {
-        "VAR1":"&lt;val1&gt;"
+        "VAR1":"<val1>"
       },
       {
-        "VAR2":"&lt;val2&gt;"
+        "VAR2":"<val2>"
       }
       ],
       "variablestore": [
         {
-          "name": "&lt;variable_name1&gt;",
-          "value": "&lt;variable_value1&gt;",
-          "type": "&lt;variable_type1&gt;",
+          "name": "<variable_name1>",
+          "value": "<variable_value1>",
+          "type": "<variable_type1>",
           "secure": true,
 	  "use_default": true        },
         {
-          "name": "&lt;variable_name2&gt;",
-          "value": "&lt;variable_value2&gt;",
-          "type": "&lt;variable_type2&gt;",
+          "name": "<variable_name2>",
+          "value": "<variable_value2>",
+          "type": "<variable_type2>",
           "secure": false,
 	  "use_default": true
 	  }
@@ -932,7 +938,7 @@ ibmcloud schematics workspace upload  --id WORKSPACE_ID --file FILE_NAME --templ
 | ----- | -------- | ------ |
 | `--id` or `-i` | Required |  The unique identifier of the workspace where you want to upload your tape archive file (`.tar`). To find the ID of your workspace, run `ibmcloud schematics workspace list` command.|
 | `--file` or `-f` | Required | Enter the full file path on your local machine where your `.tar` file is stored.|
-| `--template` or `-tid` | Required |  The unique identifier of the Terraform template for which you want to show the content of the Terraform statefile. To find the ID of the template, run `ibmcloud schematics workspace get --id &lt;workspace_ID&gt;` and find the template ID in the **Template Variables for:** field of your command-line output.|
+| `--template` or `-tid` | Required |  The unique identifier of the Terraform template for which you want to show the content of the Terraform statefile. To find the ID of the template, run `ibmcloud schematics workspace get --id <workspace_ID>` and find the template ID in the **Template Variables for:** field of your command-line output.|
 | `--output` or `-o` | Optional | Return the command-line output in JSON format. Currently only `JSON` file format is supported. |
 | `--json` or `-j` | Deprecated | Prints the output in the JSON format. |
 {: caption="Schematics workspace upload flags" caption-side="top"}
@@ -980,8 +986,8 @@ ibmcloud schematics apply --id WORKSPACE_ID [--target RESOURCE1] [--target RESOU
 | Flag | Required / Optional |Description |
 | ----- | -------- | ------ |
 | `--id` or `-i` | Required |  The unique identifier of the workspace that points to the Terraform template in your source control repository that you want to apply in {{site.data.keyword.cloud_notm}}. To find the ID of your workspace, run `ibmcloud schematics workspace list` command.|
-| `--target` or `-t` | Optional | Target the creation of a specific resource of your Terraform configuration file by entering the Terraform resource address, such as `ibm_is_instance.vm1`. All other resources that are defined in your configuration file remain uncreated or unupdated. To target the creation of multiple resources, use the following syntax: `--target &lt;resource1&gt; --target &lt;resource2&gt;`. If the targeted resource specifies the `count` attribute and no index is specified in the resource address, such as `ibm_is_instance.vm1[1]`, all instances that share the same resource name are targeted for creation.|
-| `--var-file` or `--vf` | Optional |  The file path to the `terraform.tfvars` file that you created on your local machine. Use this file to store sensitive information, such as the {{site.data.keyword.cloud_notm}} API key or credentials to connect to {{site.data.keyword.cloud_notm}} classic infrastructure in the format `&lt;key&gt;=&lt;value&gt;`. All key value pairs that are defined in this file are automatically loaded into Terraform when you initialize the Terraform CLI. To specify multiple `tfvars` files, specify `--var-file TFVARS_FILE_PATH1 --var-file TFVARS_FILE_PATH2`.|
+| `--target` or `-t` | Optional | Target the creation of a specific resource of your Terraform configuration file by entering the Terraform resource address, such as `ibm_is_instance.vm1`. All other resources that are defined in your configuration file remain uncreated or unupdated. To target the creation of multiple resources, use the following syntax: `--target <resource1> --target <resource2>`. If the targeted resource specifies the `count` attribute and no index is specified in the resource address, such as `ibm_is_instance.vm1[1]`, all instances that share the same resource name are targeted for creation.|
+| `--var-file` or `--vf` | Optional |  The file path to the `terraform.tfvars` file that you created on your local machine. Use this file to store sensitive information, such as the {{site.data.keyword.cloud_notm}} API key or credentials to connect to {{site.data.keyword.cloud_notm}} classic infrastructure in the format `<key>=<value>`. All key value pairs that are defined in this file are automatically loaded into Terraform when you initialize the Terraform CLI. To specify multiple `tfvars` files, specify `--var-file TFVARS_FILE_PATH1 --var-file TFVARS_FILE_PATH2`.|
 | `--force` or `-f` | Optional | Force the execution of this command without user prompts. |
 | `--output` or `-o` | Optional | Return the command-line output in JSON format. Currently only `JSON` file format is supported. |
 | `--json` or `-j` | Deprecated | Prints the output in the JSON format. |
@@ -1021,7 +1027,7 @@ ibmcloud schematics destroy --id WORKSPACE_ID [--target RESOURCE1] [--target RES
 | Flag | Required / Optional |Description |
 | ----- | -------- | ------ |
 | `--id` or `-i` | Required |  The unique identifier of the workspace that points to the Terraform template in your source repository that specifies the {{site.data.keyword.cloud_notm}} resources that you want to remove. To find the ID of a workspace, run `ibmcloud schematics workspace list` command.|
-| `--target` or `-t` | Optional | Target the deletion of a specific resource by entering the Terraform resource address, such as `ibm_is_instance.vm1`. All other resources in your workspace remain unchanged. To target the deletion of multiple resources, use the following syntax: `--target &lt;resource1&gt; --target &lt;resource2&gt;`. If the targeted resource specifies the `count` attribute and no index is specified in the resource address, such as `ibm_is_instance.vm1[1]`, all instances that share the same resource name are targeted for deletion. Also, if the targeted resource can only be deleted if dependent resources are deleted, such as a VPC can only be deleted if the attached subnet is deleted, then all dependent resources are targeted for deletion as well.|
+| `--target` or `-t` | Optional | Target the deletion of a specific resource by entering the Terraform resource address, such as `ibm_is_instance.vm1`. All other resources in your workspace remain unchanged. To target the deletion of multiple resources, use the following syntax: `--target <resource1> --target <resource2>`. If the targeted resource specifies the `count` attribute and no index is specified in the resource address, such as `ibm_is_instance.vm1[1]`, all instances that share the same resource name are targeted for deletion. Also, if the targeted resource can only be deleted if dependent resources are deleted, such as a VPC can only be deleted if the attached subnet is deleted, then all dependent resources are targeted for deletion as well.|
 | `--force` or `-f` | Optional | Force the execution of this command without user prompts. |
 | `--output` or `-o` | Optional | Return the command-line output in JSON format. Currently only `JSON` file format is supported. |
 | `--json` or `-j` | Deprecated | Prints the output in the JSON format. |
@@ -1227,6 +1233,9 @@ ibmcloud schematics action create --name start-vsi --location us-south --resourc
 
 Create a JSON file that includes the details for the action that you want to create, such as the ID, name, and description. Then, use the `--file` command option to create your action from your payload file.
 {: shortdesc}
+
+You need to replace the `<...>` placeholders with the actual values. For example, `"<ACTION_NAME>"` as "testaction".
+{: note}
 
 **Syntax**
 
@@ -1496,6 +1505,9 @@ If the action contains the playbook name, you need to add the playbook name, so 
 You can provide a payload file to specify certain parameters for the `job run` command. Then, you pass the file name to the command by using the `--file` command option.
 {: shortdesc}
 
+You need to replace the `<...>` placeholders with the actual values. For example, `"<COMMAND_OBJECT>"` as "action".
+{: note}
+
 **Syntax**
 
 ```
@@ -1737,6 +1749,9 @@ ibmcloud schematics resource-query create --name RESOURCE_QUERY_NAME [--type RES
 You can provide a payload file to specify certain parameters for the `resource_query create` command. Then, you pass the file name to the command by using the `--file` command option. For a list of supported resource queries, see [Supported resource queries](/docs/schematics?topic=schematics-inventories-setup#supported-queries).
 {: shortdesc} 
 
+You need to replace the `<...>` placeholders with the actual values. For example, `"<WORKSPACE_ID"` as "us-east.workspace.ID1231".
+{: note}
+
 **Syntax**
 
 ```
@@ -1966,8 +1981,12 @@ You need to pass either `--inventories-ini` file path or `--resource-query` ID f
 #### Using the payload file
 {: #inv-create-payload}
 
-You can provide a payload file to specify certain parameters for the `inventory create` command. Then, you pass the file name to the command by using the `--file` command option. 
-{: shortdesc} 
+You can provide a payload file to specify certain parameters for the `inventory create` command. Then, you pass the file name to the command by using the `--file` command option.
+{: shortdesc}
+
+You need to replace the `<...>` placeholders with the actual values. For example, `"<INVENTORY_NAME>"` as "myinventory".
+{: note}
+
 
 **Syntax**
 
@@ -2406,7 +2425,7 @@ ibmcloud schematics state pull --id WORKSPACE_ID --template TEMPLATE_ID
 | Flag | Required / Optional | Description |
 | ----- | -------- | ------ | 
 | `--id` or `-i` | Required | The unique ID of the workspace where you want to run the commands. |
-| `--template` or `--tid` | Required | The unique identifier of the Terraform template for which you want to show the content of the Terraform statefile. To find the ID of the template, run `ibmcloud schematics workspace get --id &lt;workspace_ID&gt;` and find the template ID in the **Template Variables for:** field of your command-line output. |
+| `--template` or `--tid` | Required | The unique identifier of the Terraform template for which you want to show the content of the Terraform statefile. To find the ID of the template, run `ibmcloud schematics workspace get --id <workspace_ID>` and find the template ID in the **Template Variables for:** field of your command-line output. |
 {: caption="Schematics state pull flags" caption-side="top"}
 
 **Example**
