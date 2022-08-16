@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-12"
+lastupdated: "2022-08-16"
 
 keywords: schematics command-line reference, schematics commands, schematics command-line, schematics reference, command-line
 
@@ -107,12 +107,12 @@ ibmcloud schematics action create --name ACTION_NAME [--description DESCRIPTION]
 | `--bastion` or `-b` | Optional | The IP address of the bastion host.|
 | `--bastion-credential-json` or `--bj` | Optional | Provide path of JSON file that contains bastion credential JSON payload to access the bastion host.|
 | `--inventory` or `-y` | Optional | The ID of the resource inventory that you want to use in your action. To list existing inventories, run `ibmcloud schematics inventory list`. |
-| `--inventory-connection-type` or `--it` | Optional | Type of inventory connection. Supported values are  `ssh`, or `winrm`. **Note** Currently, WinRM supports only Windows system with the public IPs and do not support Bastion host.|
+| `--inventory-connection-type` or `--it` | Optional | Type of inventory connection. Supported values are  `ssh`, or `winrm`. **Note** Currently, WinRM supports only Windows system with the public `IPs` and do not support Bastion host.|
 | `--input` or `--in` | Optional | The input variables for your action. Input variables must be entered as key-value pairs, such as `--input mykey=myvalue`. To specify multiple input variables, use multiple `--input` flags in your command. You can also store your input variables in a file and reference this file by using the `--input-file` command option.|
 |`--input-file` or `--if`|Optional | The path to a file where you specified all your input variables. Input variables must be specified as key-value pairs in JSON format. |
 | `--env` or `-e` | Optional | The environment variables for an action. Environment variables must be entered as key-value pairs, such as `--env mykey=myvalue`. To provide multiple environment variables, use multiple `--env` flags in your command.|
 | `--env-file` or `-E`| Optional | The path to a file where you specified all environment variables for an action. Environment variables must be specified as key-value pairs in JSON format. |
-| `--github-token` or `-g` | Optional | The personal access token in GitHub that you want to use to connect to a private GitHub repository. If you want to clone from the Git repository see the [allowed and blocked file extensions](/docs/schematics?topic=schematics-faqs#clone-file-extension) for cloning.|
+| `--github-token` or `-g` | Optional | The personal access token in GitHub that you want to use to connect to a private GitHub repository. If you want to clone from the Git repository see the [allowed and blocked file extensions](/docs/schematics?topic=schematics-workspaces-faq#clone-file-extension) for cloning.|
 | `--output` or `-o` | Optional | Return the command-line output in JSON format. Currently only `JSON` file format is supported. |
 | `--file` or `-f` | Required | The path to the JSON payload file containing the definition of the action that you want to create. For more information, see [Using a payload file](#create-action-payload). |
 | `--no-prompt` | Optional | Set this flag to run the command without an interactive mode. |
@@ -192,7 +192,7 @@ Instead of entering the command options or using a payload file, you can use the
 3. Enter the resource group where you want to create the action and press the return key.
 4. Enter the location where you want to create the action, such as `us-south`, `us-east`, `eu-de`, or `eu-gb`. Then, press the return key. The location determines where your action runs and where your action data is stored. For more information, see [Where is my information stored?](/docs/schematics?topic=schematics-secure-data#pi-location). Make sure that you can store data in this location as you cannot change the location after the action is created.
 5. Enter the URL to the GitHub repository where your Ansible playbook is stored. Then, press the return key.
-6. If applicable, enter the personal access token that you want to use to access your GitHub repository. Then, press the return key. If you want to clone from the Git repository see the [allowed and blocked file extensions](/docs/schematics?topic=schematics-faqs#clone-file-extension) for cloning.
+6. If applicable, enter the personal access token that you want to use to access your GitHub repository. Then, press the return key. If you want to clone from the Git repository see the [allowed and blocked file extensions](/docs/schematics?topic=schematics-workspaces-faq#clone-file-extension) for cloning.
 7. Enter the name of the Ansible playbook that you want to run and press the return key. 
 8. Review the details of the action that was created for you. 
 
@@ -221,13 +221,13 @@ ibmcloud schematics action update --id ACTION_ID --name ACTION_NAME [--descripti
 | `--resource-group` or `-r` | Required | Resource-group name for an Action.|
 | `--template` or `-tr` | Optional | The URL to the Git repository where your Ansible playbook is stored.|
 | `--playbook-name` or  `--pn` | Optional | Name of the playbook.|
-| `--github-token` or `-g` | Optional | The personal access token in GitHub that you want to use to connect to a private GitHub repository. If you want to clone from the Git repository see the [allowed and blocked file extensions](/docs/schematics?topic=schematics-faqs#clone-file-extension) for cloning.|
+| `--github-token` or `-g` | Optional | The personal access token in GitHub that you want to use to connect to a private GitHub repository. If you want to clone from the Git repository see the [allowed and blocked file extensions](/docs/schematics?topic=schematics-workspaces-faq#clone-file-extension) for cloning.|
 | `--credentials` or `-C` | Optional | The file path to the private SSH key that you want to use access your target host, such as `~/.ssh/id_rsa`. The SSH key should contain `\n` at the end of the key details in case of command-line or API calls.|
 | `--credential-json` or `--cj` | Optional | Provide path of JSON file that contains credential JSON payload to access the target host. |
 | `--bastion` or `-b` | Optional | The IP address of the bastion host.|
 | `--bastion-credential-json` or `--bj` | Optional | Provide path of JSON file that contains bastion credential JSON payload to access the bastion host.|
 | `--inventory` or `-y` | Optional | The ID of the resource inventory that you want to use in your action. To list existing inventories, run `ibmcloud schematics inventory list`. |
-| `--inventory-connection-type` or `--it`| Optional | Type of inventory connection. Supported values are `ssh`, or `winrm`. **Note** Currently, WinRM supports only Windows system with the public IPs and do not support Bastion host.|
+| `--inventory-connection-type` or `--it`| Optional | Type of inventory connection. Supported values are `ssh`, or `winrm`. **Note** Currently, WinRM supports only Windows system with the public `IPs` and do not support Bastion host.|
 | `--input` or `--in` | Optional | The input variables for your action. Input variables must be entered as key-value pairs, such as `--input mykey=myvalue`. To specify multiple input variables, use multiple `--input` flags in your command. You can also store your input variables in a file and reference this file in the `--input-file` command option.|
 |`--input-file` or `--if`|Optional | The path to a file where you specified all your input variables. Input variables must be specified as key-value pairs in JSON format. |
 | `--env` or `-e` | Optional | The environment variables for an action. Environment variables must be entered as key-value pairs, such as `--env mykey=myvalue`. To provide multiple environment variables, use multiple `--env` flags in your command.|
@@ -373,7 +373,7 @@ ibmcloud schematics action upload --id us.ACTION.testphase1.2eddf83a --file <FIL
 ## Agents commands
 {: #agents-cmd}
 
-{{site.data.keyword.bpshort}} Blueprints is a [Beta feature](/docs/schematics?topic=schematics-bp-beta-limitations) that is available for evaluation and testing purposes. It is not intended for production usage. Refer to the list of [limitations](/docs/schematics?topic=schematics-bp-beta-limitations) for the Beta release.
+{{site.data.keyword.bpshort}} Agents is a [Beta feature](/docs/schematics?topic=schematics-agent-beta-limitations) that is available for evaluation and testing purposes. It is not intended for production usage. Refer to, the list of [limitations for Agents](/docs/schematics?topic=schematics-agent-beta-limitations) in the Beta release.
 {: beta}
 
 ### `ibmcloud schematics agents bind-workspaces`
@@ -483,7 +483,7 @@ ibmcloud schematics agents register --name AGENT_NAME --profile-id PROFILE_ID --
 | `--resource-group` or `-r` | Optional |  Resource group for the Agent.|
 | `--tags` or `-t`| Optional | Agent tags. This flag can be used multiple times and search the Agent related resources faster.|
 | `--file` or `-f`| Optional | Path to the JSON file containing the definition of the Agent.|
-| `--output` or `-o` | Optiomal |Return the command-line output in JSON format. Currently only `JSON` file format is supported.|
+| `--output` or `-o` | Optional |Return the command-line output in JSON format. Currently only `JSON` file format is supported.|
 | `--no-prompt` | Optional | Set this flag to update an inventory without an interactive command-line session.|
 {: caption="{{site.data.keyword.bpshort}} agent register flags" caption-side="top"}
 
@@ -554,7 +554,7 @@ ibmcloud schematics agents update --id AGENT_ID
 ### `ibmcloud schematics workspace new with Agent`
 {: #schematics-agent-new}
 
-Create the {{site.data.keyword.bpshort}} Workspace to work with your Terraform configuration and bind your Agent to the new Workspace. 
+Create the {{site.data.keyword.bpshort}} Workspace to work with your Terraform configuration and bind your Agent to the new workspace. 
 
 **Syntax:**
 
@@ -589,6 +589,7 @@ ibmcloud schematics workspace get --id WORKSPACE_ID [--output OUTPUT][--json]
 For more information, about the flags refer to, [Workspace get](/docs/schematics?topic=schematics-schematics-cli-reference&interface=cli#schematics-workspace-get) command.
 {: note}
 
+
 ## Blueprints commands
 {: #blueprints-cmd}
 
@@ -601,13 +602,18 @@ For more information, about the flags refer to, [Workspace get](/docs/schematics
 Create a {{site.data.keyword.bpshort}} Blueprint by using the `ibmcloud schematics blueprint create` command.
 {: shortdesc}
 
+For {{site.data.keyword.bpshort}} Blueprints, the [{{site.data.keyword.bpshort}} plug-in](/docs/schematics?topic=schematics-setup-cli#install-schematics-plugin) version must be greater than the `1.11.0` version.
+{: important}
+
 **Syntax to create using command:**
 
 ```sh
-ibmcloud schematics blueprint create { --name BLUEPRINT_NAME --resource-group RESOURCE_GROUP --bp-git-url BLUEPRINT_GIT_URL -—bp-git-file BLUEPRINT_GIT_FILE  [--bp-git-branch BLUEPRINT_GIT_BRANCH | --bp-git-release BLUEPRINT_GIT_RELEASE] --input-git-url INPUT_GIT_URL -—input-git-file INPUT_GIT_FILE  [--input-git-branch INPUT_GIT_BRANCH | --input-git-release INPUT_GIT_RELEASE]  [--inputs BLUEPRINT_INPUT_LIST] [--github-token GITHUB_TOKEN] | --file CONFIG_FILE_PATH }
-
+ibmcloud schematics blueprint create --name BLUEPRINT_NAME --resource-group RESOURCE_GROUP --bp-git-url BLUEPRINT_GIT_URL -—bp-git-file BLUEPRINT_GIT_FILE [--bp-git-branch BLUEPRINT_GIT_BRANCH] [--bp-git-release BLUEPRINT_GIT_RELEASE] --input-git-url INPUT_GIT_URL -—input-git-file INPUT_GIT_FILE [--input-git-branch INPUT_GIT_BRANCH] [--input-git-release INPUT_GIT_RELEASE] [--inputs BLUEPRINT_INPUT_LIST] [--github-token GITHUB_TOKEN] | --file CONFIG_FILE_PATH
 ```
 {: pre}
+
+If your definition file `basic-blueprint.yaml` and input file `basic-input.yaml` are stored in a `subfolder` of the Git repository, then you need to provide complete path of the URL. For example, `https://github.com/Cloud-Schematics/blueprint-basic-example/<subfolder>`. 
+{: note}
 
 **Command options:**
 
@@ -631,9 +637,10 @@ ibmcloud schematics blueprint create { --name BLUEPRINT_NAME --resource-group RE
 **Example:**
 
 ```sh
-ibmcloud schematics blueprint create -name Blueprint_Basic -resource-group Default -bp-git-url https://github.com/Cloud-Schematics/blueprint-basic-example -bp-git-branch main -bp-git-file basic-blueprint.yaml -input-git-url https://github.com/Cloud-Schematics/blueprint-basic-example -input-git-branch main -input-git-file basic-input.yaml -inputs provision_rg=true,resource_group_name=default
+ibmcloud schematics blueprint create -name Blueprint_Basic -resource-group default -bp-git-url https://github.com/Cloud-Schematics/blueprint-basicexample -bp-git-branch main -bp-git-file basic-blueprint.yaml -input-git-url https://github.com/Cloud-Schematics/blueprint-basic-example -input-gitbranch main -input-git-file basic-input.yaml -inputs provision_rg=true,resource_group_name=mynewrgdemo
 ```
 {: pre}
+
 
 #### Using a config file
 {: #bp-create-config}
@@ -736,21 +743,23 @@ ibmcloud schematics blueprint create --file createtest.json --github-token <ENTE
 Output:
 
 ```text
-Created Blueprint ID: eu-de.BLUEPRINT.Blueprint-Basic-Example.21735936
+Created Blueprint ID: Blueprint_Basic.eaB.5cd9
 
 Modules to be created
-SNO  Type    Name
-1     Workspace   basic-resource-group   
-2     Workspace   basic-cos-storage   
-      
-Blueprint job running eu-de.JOB.Blueprint-Basic-Example.da1b13ca
-Waiting:0    Draft:0    Connecting:0    In Progress:0    Inactive:2    Active:0    Failed:0   
-Type        Name                      Status           Job ID   
-Blueprint   Blueprint Basic Example   CREATE_SUCCESS   eu-de.JOB.Blueprint-Basic-Example.da1b13ca   
-Workspace   basic-resource-group      INACTIVE            
-Workspace   basic-cos-storage         INACTIVE            
-            
-Blueprint ID eu-de.BLUEPRINT.Blueprint-Basic-Example.21735936 create_success at Mon Jun 27 16:18:47 BST 2022
+SNO Type Name
+1 terraform basic-resource-group
+2 terraform basic-cos-storage
+
+Blueprint job running us-east.JOB.Blueprint_Basic.bb553ac5
+Waiting:0 Draft:0 Connecting:0 In Progress:0 Inactive:2 Active:0
+Failed:0
+Type Name Status Job ID
+Blueprint Blueprint_Basic CREATE_SUCCESS useast.JOB.Blueprint_Basic.bb553ac5
+terraform basic-resource-group INACTIVE
+terraform basic-cos-storage INACTIVE
+
+Blueprint ID Blueprint_Basic.eaB.5cd9 create_success at 2022-08-03
+21:19:16
 OK
 ```
 {: screen}
@@ -778,7 +787,7 @@ ibmcloud schematics blueprint install --id BLUEPRINT_ID
 **Example:**
 
 ```sh
-ibmcloud schematics blueprint install -id eu-de.BLUEPRINT.Blueprint-Basic-Example.21735936 
+ibmcloud schematics blueprint install --id Blueprint_Basic.eaB.5cd9
 ```
 {: pre}
 
@@ -791,7 +800,7 @@ You update the Blueprint configuration in {{site.data.keyword.bpshort}} with cha
 **Syntax:**
 
 ```sh
-ibmcloud schematics blueprint update --id BLUEPRINT_ID [--input INPUT_VARIABLES_LIST] [--github-token GITHUB_TOKEN]
+ibmcloud schematics blueprint update --id BLUEPRINT_ID [--file CONFIG_FILE_PATH] [--input INPUT_VARIABLES_LIST] [--github-token GITHUB_TOKEN]
 ```
 {: pre}
 
@@ -800,6 +809,7 @@ ibmcloud schematics blueprint update --id BLUEPRINT_ID [--input INPUT_VARIABLES_
 | Flag | Required / Optional |Description |
 | ----- | -------- | ------ |
 | `--id` or `-i`| Required | The ID of the Blueprint.|
+| `--file` or `-f` | Optional | The path to the JSON file containing the definition of the Blueprint to update. |
 | `--input` or `--in` | Optional | Input variables for the Blueprint. Pass multiple inputs as comma separated. For example, `--options -inputs test=testvalue,test1=testvalue1`.|
 | `--github-token` or `-g` | Optional | The GitHub token value to access private Git repository.|
 {: caption="{{site.data.keyword.bpshort}} Blueprints update flags" caption-side="top"}
@@ -807,7 +817,7 @@ ibmcloud schematics blueprint update --id BLUEPRINT_ID [--input INPUT_VARIABLES_
 **Example:**
 
 ```sh
-ibmcloud schematics blueprint update -id eu-de.BLUEPRINT.Blueprint-Basic-Example.21735936
+ibmcloud schematics blueprint update -id Blueprint_Basic.eaB.5cd9
 ```
 {: pre}
 
@@ -820,7 +830,7 @@ Using the `ibmcloud schematics blueprint get` command you can display the config
 **Syntax:**
 
 ```sh
-ibmcloud schematics blueprint get --id BLUEPRINT_ID [--profile PROFILE]
+ibmcloud schematics blueprint get --id BLUEPRINT_ID [--level LEVEL]
 ```
 {: pre}
 
@@ -829,13 +839,13 @@ ibmcloud schematics blueprint get --id BLUEPRINT_ID [--profile PROFILE]
 | Flag | Required / Optional |Description |
 | ----- | -------- | ------ |
 | `--id` or `-i` | Required | The ID of the Blueprints. |
-| `--profile` or `-p` | Optional | Level of details to return. Valid values are `detailed` or `d`, `modules` or `m`, and `outputs` or `o`. The default value is **summary**. |
+| `--level` or `-l` | Optional | Level of details to return. Valid values are `summary`, `detailed`, `modules`, and `outputs`. The default value is **summary**. |
 {: caption="{{site.data.keyword.bpshort}} Blueprints get flags" caption-side="top"}
 
 **Example:**
 
 ```sh
-ibmcloud schematics blueprint get --id eu-de.BLUEPRINT.Blueprint-Basic-Example.21735936
+ibmcloud schematics blueprint get --id Blueprint_Basic.eaB.5cd9
 ```
 {: pre}
 
@@ -857,8 +867,8 @@ ibmcloud schematics blueprint list [--profile PROFILE] [--limit LIMIT] [--offset
 
 | Flag | Required / Optional |Description |
 | ----- | -------- | ------ |
-| `--limit` or `-l` | Optional | The maximum number of Blueprints to list. Ignored if a negative number is set. Maximum number to list is `200`, the default is `-1`|
 | `--profile` or `-p` | Optional | Level of details to return. Valid values are `summary` or `ids`. The default value is **summary**. |
+| `--limit` or `-l` | Optional | The maximum number of Blueprints to list. Ignored if a negative number is set. Maximum number to list is `200`, the default is `-1`|
 | `--offset` or `-m` | Optional | Offset in list. Ignored if a negative number is set. The default value is `-1`.
 {: caption="{{site.data.keyword.bpshort}} Blueprints list flags" caption-side="top"}
 
@@ -866,35 +876,6 @@ ibmcloud schematics blueprint list [--profile PROFILE] [--limit LIMIT] [--offset
 
 ```sh
 ibmcloud schematics blueprint list 
-```
-{: pre}
-
-### `ibmcloud schematics blueprint delete`
-{: #schematics-blueprint-delete}
-
-Delete a {{site.data.keyword.bpshort}} Blueprint. A Blueprint can only be deleted once all resources have been destroyed using the `destroy` command and Workspaces are in `Inactive` state.
-{: shortdesc}
-
-**Syntax:**
-
-```sh
-ibmcloud schematics blueprint delete [--id BLUEPRINT_ID] [—force-delete] [--no-prompt]
-```
-{: pre}
-
-**Command options:**
-
-| Flag | Required / Optional |Description |
-| ----- | -------- | ------ |
-| `--id` or `-i`| Required | The ID of the Blueprint.|
-| `--force-delete` or `--fd` | Optional | Force delete a Blueprint when there are Workspaces that are not in an `Inactive` state .|
-| `--no-prompt` | Optional |Set this flag to stop interactive command-line session. |
-{: caption="{{site.data.keyword.bpshort}} Blueprints delete flags" caption-side="top"}
-
-**Example:**
-
-```sh
-ibmcloud schematics blueprint delete -id eu-de.BLUEPRINT.Blueprint-Basic-Example.21735936
 ```
 {: pre}
 
@@ -907,7 +888,7 @@ Destroys all the resources associated with the modules in a Blueprint. This acti
 **Syntax:**
 
 ```sh
-ibmcloud schematics blueprint destroy --id BLUEPRINT_ID
+ibmcloud schematics blueprint destroy --id BLUEPRINT_ID [--no-prompt]
 ```
 {: pre}
 
@@ -922,7 +903,37 @@ ibmcloud schematics blueprint destroy --id BLUEPRINT_ID
 **Example:**
 
 ```sh
-ibmcloud schematics blueprint destroy -id eu-de.BLUEPRINT.Blueprint-Basic-Example.21735936
+ibmcloud schematics blueprint destroy -id Blueprint_Basic.eaB.5cd9
+```
+{: pre}
+
+
+### `ibmcloud schematics blueprint delete`
+{: #schematics-blueprint-delete}
+
+Delete a {{site.data.keyword.bpshort}} Blueprint. A Blueprint can only be deleted once all resources have been destroyed using the `destroy` command and Workspaces are in `Inactive` state. For more information, about the difference between destroy and delete command, refer to, [Deleting a workspace](/docs/schematics?topic=schematics-workspace-setup&interface=ui#del-workspace).
+{: shortdesc}
+
+**Syntax:**
+
+```sh
+ibmcloud schematics blueprint delete [--id BLUEPRINT_ID] [—force-delete] [--no-prompt]
+```
+{: pre}
+
+**Command options:**
+
+| Flag | Required / Optional |Description |
+| ----- | -------- | ------ |
+| `--id` or `-i`| Required | The ID of the Blueprint.|
+| `--force-delete` or `--fd` | Optional | Force deletes the Blueprint including the active module. This action cannot be reversed.|
+| `--no-prompt` | Optional |Set this flag to stop interactive command-line session. |
+{: caption="{{site.data.keyword.bpshort}} Blueprints delete flags" caption-side="top"}
+
+**Example:**
+
+```sh
+ibmcloud schematics blueprint delete -id Blueprint_Basic.eaB.5cd9
 ```
 {: pre}
 
@@ -949,7 +960,7 @@ ibmcloud schematics blueprint job get --id JOB_ID
 **Example:**
 
 ```sh
-ibmcloud schematics blueprint job get --id eu-de.BLUEPRINT.Blueprint-Basic-Example.21735936
+ibmcloud schematics blueprint job get --id Blueprint_Basic.eaB.5cd9
 ```
 {: pre}
 
@@ -972,13 +983,13 @@ ibmcloud schematics blueprint job list --id BLUEPRINT_ID [--limit LIMIT] [--offs
 | ----- | -------- | ------ |
 | `--id` or `-i`| Required | The ID of the Blueprint. |
 | `--limit` or `-l` | Optional | The maximum number of jobs to list. Ignored if a negative number is set. Maximum number to list is `200`, the default is `-1`|
-| `--offset` or `-m` | Optional | Offset in list. Ignored if a negative number is set. The default value is `-1`.
+| `--offset` or `-m` | Optional | Offset in list. Ignored if a negative number is set. The default value is `-1`.|
 {: caption="{{site.data.keyword.bpshort}} Blueprints job list flags" caption-side="top"}
 
 **Example:**
 
 ```sh
-ibmcloud schematics blueprint job logs -id eu-gb.JOB.Blueprint-Basic-Example.0a0eb889
+ibmcloud schematics blueprint job logs -id useast.JOB.Blueprint_Basic.e4081308
 ```
 {: pre}
 
@@ -1005,7 +1016,7 @@ ibmcloud schematics blueprint job logs --id JOB_ID
 **Example:**
 
 ```sh
-ibmcloud schematics blueprint job logs  
+ibmcloud schematics blueprint job logs --id useast.JOB.Blueprint_Basic.e4081308
 ```
 {: pre}
 
@@ -1022,7 +1033,7 @@ The key management system will list the instance that are created from your spec
 
 - You should have your `KYOK`, or `BYOK`. To create the {{site.data.keyword.keymanagementservicelong_notm}} keys, refer to, [create KYOK root key by using UI](/docs/key-protect?topic=key-protect-create-root-keys). To create an {{site.data.keyword.cloud_notm}} {{site.data.keyword.hscrypto}} keys, refer to, [create BYOK root key by using UI](/docs/hs-crypto?topic=hs-crypto-create-root-keys).
 - You need to [add root key](/docs/key-protect?topic=key-protect-import-root-keys#import-root-key-gui) to {{site.data.keyword.bpshort}} services.
-- You need to configure [service to service authorization](/docs/account?topic=account-serviceauth&interface=ui#create-auth) to integrate `BYOK`, and `KYOK` in {{site.data.keyword.bpshort}} service.
+- You need to configure [service to service authorization](/docs/account?topic=account-serviceauth#create-auth) to integrate `BYOK`, and `KYOK` in {{site.data.keyword.bpshort}} service.
 
 
 KMS setting is a one time settings. You need to open the [support ticket](/docs/get-support?topic=get-support-using-avatar) to update KMS settings.
@@ -1620,7 +1631,7 @@ ibmcloud schematics job list --resource-type action --id us-south.ACTION.interac
 ### `ibmcloud schematics job logs`
 {: #schematics-logs-job}
 
-Retrieve the detailed logs of a job that ran for your {{site.data.keyword.bpshort}} action. For more information, about viewing job queue logs, see [Reviewing the {{site.data.keyword.bpshort}} job details](/docs/schematics?topic=schematics-workspace-setup&interface=ui#job-logs).
+Retrieve the detailed logs of a job that ran for your {{site.data.keyword.bpshort}} action. For more information, about viewing job queue logs, see [Reviewing the {{site.data.keyword.bpshort}} job details](/docs/schematics?topic=schematics-workspace-setup#job-logs).
 {: shortdesc}
 
 **Syntax:**
@@ -1687,7 +1698,7 @@ Deploy, modify, and remove {{site.data.keyword.cloud_notm}} resources by using {
 ### `ibmcloud schematics apply`
 {: #schematics-apply}
 
-Scan and run the infrastructure code of your Terraform template that your workspace points to. When you apply a Terraform template, your resources are provisioned, modified, [stored](/docs/schematics?topic=schematics-faqs#persist-file), or removed in {{site.data.keyword.cloud_notm}}.
+Scan and run the infrastructure code of your Terraform template that your workspace points to. When you apply a Terraform template, your resources are provisioned, modified, [stored](/docs/schematics?topic=schematics-general-faq#persist-file), or removed in {{site.data.keyword.cloud_notm}}.
 {{site.data.keyword.bplong_notm}} supports 50 API requests per minute, per host, and per customer. The host can be `us-east`, `us-south`, `eu-gb`, or `eu-de` region. You need to wait before calling the command again.
 {: shortdesc}
 
@@ -1825,7 +1836,7 @@ ibmcloud schematics output --id myworkspace3_2-31cf7130-d0c4-4d
 ### `ibmcloud schematics plan`
 {: #schematics-plan}
 
-Scan the Terraform template in your source repository and compare this template against the {{site.data.keyword.cloud_notm}} resources that are already deployed. The command-line output shows the {{site.data.keyword.cloud_notm}} resources that must be added, modified, [persisted](/docs/schematics?topic=schematics-faqs#persist-file), or removed to achieve the state that is described in your configuration file.
+Scan the Terraform template in your source repository and compare this template against the {{site.data.keyword.cloud_notm}} resources that are already deployed. The command-line output shows the {{site.data.keyword.cloud_notm}} resources that must be added, modified, [persisted](/docs/schematics?topic=schematics-general-faq#persist-file), or removed to achieve the state that is described in your configuration file.
 {{site.data.keyword.bplong_notm}} supports 50 API requests per minute, per host, and per customer. The host can be `us-east`, `us-south`, `eu-gb`, or `eu-de` region. You need to wait before calling the command again.
 {: shortdesc}
 
@@ -2089,6 +2100,54 @@ ibmcloud schematics resource-query  update  --id us-east.INVENTORY.inventory1231
 {: pre}
 
 
+## Stop commands
+{: #stop-cmds}
+
+After invoking a job on a {{site.data.keyword.bpshort}} Workspaces like a `plan`, an `apply`, or a `destroy`. You may want to stop the running job, or want to stop provisioning resources. Stopping, or cancel a job helps you to know whether the job is stuck, does the job has lot of wait time? {{site.data.keyword.bpshort}} allows users to `force-stop`, `interrupt`, or `terminate` the running job. 
+{: shortdesc}
+
+Review the commands to `force-stop`, `interrupt`, or `terminate` job stop command.
+
+### `ibmcloud schematics workspace job stop`
+{: #schematics-stop-job}
+
+Stops a running action or a job in {{site.data.keyword.bplong_notm}} workspaces.
+{: shortdesc}
+
+**Syntax:**
+
+```sh
+ibmcloud schematics workspace job stop --id WORKSPACE_ID --job-id JOB_ID [--cancel] [--force-stop] [--terminate]
+```
+{: pre}
+
+**Command options:**
+
+| Flag | Required / Optional | Description |
+| ----- | -------- | ------ |
+| `--id` or `-i` | Required | The workspace ID to update. |
+| `--job-id` or `--jid` | Required | The job ID of the job. |
+| `--interrupt,` | Optional | Removes the job from the pending queue.|
+| `--force-stop` or `--fs` | Optional | Sends a kill signal to the Terraform execution in the engine, also attempts to immediately stop the execution. |
+| `--terminate` or `-t` | Optional | Abruptly kills the engine, marks the job as stopped, and unlocks your workspace. **Note** Data is not saved using this flag. |
+{: caption="{{site.data.keyword.bpshort}} job stop flags" caption-side="bottom"}
+
+**Example:**
+
+```sh
+ibmcloud schematics workspace job stop --id <WORKSPACE_ID> --force-stop --job-id <JOB_ID>
+```
+{: pre}
+
+```sh
+ibmcloud schematics workspace job stop --id <WORKSPACE_ID> --interrupt --job-id <JOB_ID>
+```
+{: pre}
+
+```sh
+ibmcloud schematics workspace job stop --id <WORKSPACE_ID> --terminate --job-id <JOB_ID>
+```
+{: pre}
 
 ## Terraform commands
 {: #tf-cmds}
@@ -2179,18 +2238,18 @@ ibmcloud schematics workspace commands --id WORKSPACE_ID --file FILE_NAME
 {: codeblock}
 
 
-    The table provides the list of key parameters of the JSON file for the `Commands` API, for the command-line and the API.
+The table provides the list of key parameters of the JSON file for the `Commands` API, for the command-line and the API.
 
-    | Key | Required / Optional | Description |
-    | ------ | -------- | ---------- |
-    |`command`| Required |Provide the command. Supported commands are `show`,`taint`, `untaint`, `state`, `import`, `output`.|
-    |`command_params`| Required | The address parameters for the command name for `CLI`, such as resource name, absolute path of the file name. **Note** For API, you have to send option flag and address parameter in `command_params`.|
-    |`command_name`| Optional | The name for the command block.|
-    |`command_desc`| Optional | The text to describe the command block.|
-    |`command_onError`| Optional |  Instruction to continue or break in case of error in the command. |
-    |`command_dependsOn`|Optional| Dependency on the previous commands.|
-    |`command_status`| Not required | Displays the command executed status, either `success` or `failure`|
-    {: caption="List of key parameters" caption-side="bottom"}
+| Key | Required / Optional | Description |
+| ------ | -------- | ---------- |
+|`command`| Required |Provide the command. Supported commands are `show`,`taint`, `untaint`, `state`, `import`, `output`.|
+|`command_params`| Required | The address parameters for the command name for `CLI`, such as resource name, absolute path of the file name. **Note** For API, you have to send option flag and address parameter in `command_params`.|
+|`command_name`| Optional | The name for the command block.|
+|`command_desc`| Optional | The text to describe the command block.|
+|`command_onError`| Optional |  Instruction to continue or break in case of error in the command. |
+|`command_dependsOn`|Optional| Dependency on the previous commands.|
+|`command_status`| Not required | Displays the command executed status, either `success` or `failure`|
+{: caption="List of key parameters" caption-side="bottom"}
 
 **Example:**
 
@@ -2441,7 +2500,7 @@ ibmcloud schematics workspace get --id myworkspace-a1aa1a1a-a11a-11 --json
 ### `ibmcloud schematics workspace import`
 {: #schematics-workspace-import}
 
-You can import the existing resource with an valid address from the workspace ID and import it into your Terraform state. You need to ensure one resource can be imported to only one Terraform resource address. Otherwise, you may see unwanted behavior from {{site.data.keyword.bpshort}}.
+You can import the existing resource with an valid address from the workspace ID and import it into your Terraform state. You need to ensure one resource can be imported to only one Terraform resource address. Otherwise, you may see unwanted behaviour from {{site.data.keyword.bpshort}}.
 {: shortdesc}
 
 **Syntax:**
@@ -2710,10 +2769,10 @@ You need to replace the `<...>` placeholders with the actual values. For example
 | `location` | Optional | Enter the location where you want to create your workspace. The location determines where your {{site.data.keyword.bpshort}} Actions run and where your workspace data is stored. If you do not enter a location, {{site.data.keyword.bpshort}} determines the location based on the {{site.data.keyword.cloud_notm}} region that you targeted. To view the region that you targeted, run `ibmcloud target --output json` and look at the `region` field. To target a different region, run `ibmcloud target -r <region>`. If you enter a location, make sure that the location matches the {{site.data.keyword.cloud_notm}} region that you targeted. |
 | `description` | Optional | Enter a description for your workspace. |
 | `template_repo.url` | Optional | Enter the URL to the GitHub or GitLab repository where your Terraform configuration files are stored. |
-| `template_repo.branch` | Optional | Enter the GitHub or GitLab branch where your Terraform configuration files are stored.  **Note** Now, in template_repo, you can also update URL with more parameters as shown in the block. |
+| `template_repo.branch` | Optional | Enter the GitHub or GitLab branch where your Terraform configuration files are stored.  **Note** Now, in `template_repo`, you can also update URL with more parameters as shown in the block. |
 | `template_repo.datafolder` | Optional | Enter the GitHub or GitLab branch where your Terraform configuration files are stored. |
 | `template_repo.release` | Optional | Enter the GitHub or GitLab release that points to your Terraform configuration files. |
-| `github_source_repo_url` | Optional | Enter the link to your GitHub repository. The link can point to the `master` branch, a different branch, or a subdirectory. If you choose to create your workspace without a GitHub repository, your workspace is created with a **draft** state. To connect your workspace to a GitHub repository later, you must use the `ibmcloud schematics workspace update` command. If you plan to provide your Terraform template by uploading a tape archive file (`.tar`), leave the URL empty, and use the [ibmcloud schematics workspace upload](#schematics-workspace-upload) command after you created the workspace. If you want to clone from the Git repository see the [allowed and blocked file extensions](/docs/schematics?topic=schematics-faqs#clone-file-extension) for cloning. |
+| `github_source_repo_url` | Optional | Enter the link to your GitHub repository. The link can point to the `master` branch, a different branch, or a subdirectory. If you choose to create your workspace without a GitHub repository, your workspace is created with a **draft** state. To connect your workspace to a GitHub repository later, you must use the `ibmcloud schematics workspace update` command. If you plan to provide your Terraform template by uploading a tape archive file (`.tar`), leave the URL empty, and use the [ibmcloud schematics workspace upload](#schematics-workspace-upload) command after you created the workspace. If you want to clone from the Git repository see the [allowed and blocked file extensions](/docs/schematics?topic=schematics-workspaces-faq#clone-file-extension) for cloning. |
 | `env_values` | Optional | A list of environment variables that you want to apply during the execution of a bash script or Terraform action. This field must be provided as a list of key-value pairs. Each entry will be a map with one entry where `key = variable name` and `value = value`. You can define environment variables for {{site.data.keyword.cloud_notm}} catalog offerings that are provisioned by using a bash script files. |
 | `variable_name` | Optional | Enter the name for the input variable that you declared in your Terraform configuration files. |
 | `variable_type` | Optional | `Terraform v0.12` supports `string`, `list`, `map`, `bool`, `number` and complex data types such as `list(type)`, `map(type)`, `object({attribute name=type,..})`, `set(type)`, `tuple([type])`. |
