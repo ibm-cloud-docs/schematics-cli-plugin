@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-16"
+lastupdated: "2022-08-18"
 
 keywords: schematics command-line reference, schematics commands, schematics command-line, schematics reference, command-line
 
@@ -599,7 +599,7 @@ For more information, about the flags refer to, [Workspace get](/docs/schematics
 ### `ibmcloud schematics blueprint create`
 {: #schematics-blueprint-create}
 
-Create a {{site.data.keyword.bpshort}} Blueprint by using the `ibmcloud schematics blueprint create` command.
+Create a {{site.data.keyword.bpshort}} Blueprint by using the `ibmcloud schematics blueprint create` command. The Blueprint is created from a user provided configuration that specifies the source of the Blueprint definition in a Git repository, the input files and optional override inputs.
 {: shortdesc}
 
 For {{site.data.keyword.bpshort}} Blueprints, the [{{site.data.keyword.bpshort}} plug-in](/docs/schematics?topic=schematics-setup-cli#install-schematics-plugin) version must be greater than the `1.11.0` version.
@@ -623,11 +623,11 @@ If your definition file `basic-blueprint.yaml` and input file `basic-input.yaml`
 | `--resource-group` or `-r` | Required | The management resource group for the Blueprint.|
 | `--bp-git-url` or `--bu` | Required | The Blueprint Git URL. |
 | `--bp-git-file` or `--bf`| Required | The Blueprint Git file name. |
-| `--bp-git-branch` or `--bb`| Optional | The Blueprint Git branch name, if not provided it defaults to main.|
+| `--bp-git-branch` or `--bb`| Optional | The Blueprint Git branch name, if not provided defaults to main. In case the `--bp-git-branch` and `--bp-git-release` values are not provided, the command errors for one of the value to be provided.|
 | `--bp-git-release` or `--br`| Optional | The Blueprint Git release tag. Exclusive with branch name.|
 | `--input-git-url` or `--iu`| Optional | The input Git URL.|
 | `--input-git-file` or `--if`| Optional | The input file name. |
-| `--input-git-branch` or `--ib`| Optional |The input file Git branch name. Defaults to main.|
+| `--input-git-branch` or `--ib`| Optional |The input file Git branch name, if not provided it defaults to main. In case the `--input-git-branch` and `--input-git-release` values are not provided, the command errors for one of the value to be provided.|
 | `--input-git-release` or `--ir`| Optional | The input file release tag. Exclusive with branch name.|
 | `--inputs` or `--in` | Optional | The input variables for the Blueprint. Pass multiple inputs as comma separated. For example, `--options -inputs test=value,test1=value1`.|
 | `--github-token` or `-g` | Optional | The GitHub token value to access the private Git repository. |
@@ -763,6 +763,7 @@ Blueprint ID Blueprint_Basic.eaB.5cd9 create_success at 2022-08-03
 OK
 ```
 {: screen}
+
 
 ### `ibmcloud schematics blueprint install`
 {: #schematics-blueprint-install}
