@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-24"
+lastupdated: "2023-04-09"
 
 keywords: schematics command-line reference, schematics commands, schematics command-line, schematics reference, command-line
 
@@ -374,7 +374,10 @@ ibmcloud schematics action upload --id us.ACTION.testphase1.2eddf83a --file <FIL
 ## Agent beta-1 commands
 {: #agents-cmd}
 
-{{site.data.keyword.bpshort}} Agent is a [beta-1 feature](/docs/schematics?topic=schematics-agent-beta-limitations) that are available for evaluation and testing purposes. It is not intended for production usage. Refer to the list of [limitations for Agents](/docs/schematics?topic=schematics-agent-beta-limitations) in the beta release.
+{{site.data.keyword.bplong_notm}} Agent beta-1 delivers a simplified agent installation process and policy for agent assignment.. You can review the [beta-1 release](/docs/schematics?topic=schematics-schematics-relnotes&interface=cli#schematics-mar2223) documentation and explore. 
+{: attention}
+
+{{site.data.keyword.bpshort}} Agent is a [beta-1 feature](/docs/schematics?topic=schematics-agent-beta1-limitations) that is available for evaluation and testing purposes. It is not intended for production usage.
 {: beta}
 
 ### `ibmcloud schematics agent apply`
@@ -409,7 +412,7 @@ ibmcloud schematics agent apply --id <provide your agent id>
 ### `ibmcloud schematics agent create`
 {: #schematics-agent-create}
 
-Create an agent by using {{site.data.keyword.bpshort}}. Agent help you to run your workspace jobs on your infrastructure. For more information about the steps to use create command, see [deploying agent](/docs/schematics?topic=schematics-deploy-agent-overview&interface=cli).
+Create an agent by using {{site.data.keyword.bpshort}}. Agents help you run your Terraform or Ansible jobs on your infrastructure. For more information about the steps to use create command, see [deploying agent](/docs/schematics?topic=schematics-deploy-agent-overview&interface=cli).
 {: shortdesc}
 
 Syntax
@@ -423,22 +426,21 @@ Command options
 
 | Flag | Required / Optional |Description |
 | ----- | -------- | ------ |
-| `--name` or `-n` | Required | The unique name of an agent. |
-| `--location` or `-l` | Required | Geographic locations supported by {{site.data.keyword.bpshort}} service such as, `us-south`, `us-east`, `eu-de`, `eu-gb`. Jobs are picked up from this location for processing. |
-| `--agent-location` or `--al` | Required | Specify the location where agent is deployed in the user environment. For example, `ap-north`. |
-| `--version` or `-v` | Required | Specify the version of an agent. |
+| `--name` or `-n` | Required | The unique name of an agent. Must be descriptive of the agent role, location and usage.  |
+| `--location` or `-l` | Required | The {{site.data.keyword.bpshort}} location where the agent will be defined, `us-south`, `us-east`, `eu-de`, `eu-gb`. Jobs are picked up from this location for execution. |
+| `--agent-location` or `--al` | Required | A descriptive user defined label to identify where the agent is deployed in the user environment. This could be a Cloud region or a user data center.  For example, `London MZR`. |
+| `--version` or `-v` | Required | A user defined label specifying the version of the agent. |
 | `--infra-type` or `-i` | Required | Specify the type of the target agent infrastructure. Supported values are `ibm-kubernetes`, `ibm-openshift`, or `ibm-satellite`.|
 | `--clusterid` or `-k` | Required | The ID of the Kubernetes cluster for deploying an Agent.|
-| `--cluster-resource-group` or `--kr` | Required | The resource group name of the cluster. |
+| `--cluster-resource-group` or `--kr` | Required | The name of the clusters' resource group. |
 | `--cos-id` or `--oi` | Required | The ID of the COS instance. |
 | `--cos-bucket` or `-b` | Required |  The ID or the name of the COS bucket. |
-| `--cos-location` or `--ol` | Required | Specify the region of the COS bucket. For example, `global`.|
-| `--resource-group` or `-r` | Required | Resource group name or ID for the agent. |
-| `--description` or `-d` | Optional |The short description of the agent. |
+| `--resource-group` or `-r` | Required | Resource group name or ID the agent will be associated with. |
+| `--description` or `-d` | Optional | A description that identifies the agent usage, and the network zones and resources the agent is able to access. |
 | `--plan-only` | Optional | Run plan command, after creating the agent.|
 | `--plan-apply` | Optional | Run plan and apply command, after creating the agent.|
-| `--tags` or `-t`| Optional | Agent tags. This flag can be used multiple times and search an agent related resources faster. |
-| `--file` or `f` | Optional | Path to the JSON file containing the definition of an agent. |
+| `--tags` or `-t`| Optional | Agent tags. This flag can be repeated multiple times. Tags allow for faster and easier search for agent related resources. |
+| `--file` or `f` | Optional | Path to a JSON file containing the definition of an agent. |
 | `--output` or `-o` | Optional | Specify output format, only 'JSON' is supported. |
 {: caption="{{site.data.keyword.bpshort}} agent create flags" caption-side="top"}
 
@@ -479,7 +481,7 @@ ibmcloud schematics agent delete --id <AGENT_ID>
 
 
 ### `ibmcloud schematics agent get`
-{: #schematics-agents-get}
+{: #schematics-agent-get}
 
 Retrieves the details of an agent. Agents help you to fetch your workspace jobs on your infrastructure. For more information about the steps to use get command, see [displaying an agent](/docs/schematics?topic=schematics-display-agentb1-overview&interface=cli).
 
@@ -672,12 +674,12 @@ Command options
 | `--location` or `-l` |  Optional |  The location of blueprint. Select the {{site.data.keyword.cloud_notm}} region that you wish to use to manage your {{site.data.keyword.bpshort}}. Set the region through [`ibmcloud target -r <region>`](/docs/cli?topic=cli-ibmcloud_cli#ibmcloud_target) command. |
 | `--source-type` or `-s`| Optional |  The blueprint source type. Valid values are `git_hub`, `ibm_cloud_catalog`.|
 | `--bp-git-url` or `--bu` | Required | The blueprint Git URL. This is the URL of the repository containing the blueprint template. For example `-bp-git-url https://github.com/Cloud-Schematics/blueprint-basic-example` |
-| `--bp-git-file` or `--bf`| Required | The blueprint template file name, including the file extension and any subfolders. For example `-bp-git-file <subfolder>/basic-blueprint.yaml`   |
+| `--bp-git-file` or `--bf`| Required | The blueprint template file name, including the file extension and any sub directory. For example `-bp-git-file <subfolder>/basic-blueprint.yaml`   |
 | `--bp-git-branch` or `--bb`| Optional | The blueprint Git branch name. Mutually exclusive with the `-bp-git-release` option. If both options are not specified, the branch defaults to `main`. For example `-bp-git-branch devhardening`|
 | `--bp-git-release` or `--br`| Optional | A Git release tag identifying the version of the template file. Mutually exclusive with the `-bp-git-branch` option. For example `-bp-git-release 1.4.2`|
 |  `--bp-git-token` or `--bg` | Optional | The GitHub token value to access the private Git repository. |
 | `--input-git-url` or `--igu`| Optional | The input Git URL. This is the URL of the repository containing the blueprint input file . For example `-bp-git-url https://github.com/Cloud-Schematics/blueprint-basic-example` |
-| `--input-git-file` or `--igf`| Optional | The input file name, including extension and any subfolders. For example `-input-git-file <subfolder>/basic-input.yaml`. Refer to [Blueprints input file YAML Schema](/docs/schematics?topic=schematics-bp-input-schema-yaml) for the file format. |
+| `--input-git-file` or `--igf`| Optional | The input file name, including extension and any sub directory. For example `-input-git-file <subfolder>/basic-input.yaml`. Refer to [Blueprints input file YAML Schema](/docs/schematics?topic=schematics-bp-input-schema-yaml) for the file format. |
 | `--input-git-branch` or `--igb`| Optional |The input file Git branch name. Mutually exclusive with the `-input-git-release` option. If both options are not specified, the branch defaults to `main`. For example `-input-git-branch nextdrop` |
 | `--input-git-release` or `--igr`| Optional | A Git release tag identifying the version of the input file. Mutually exclusive with the `-input-git-branch` option. For example `-input-git-release 1.0.5` |
 | `--input-git-token` or `--ig` | Optional | A GitHub token value to access the private input Git repository.|
@@ -1200,7 +1202,7 @@ Create a policy using {{site.data.keyword.bpshort}} to select one or more {{site
 Syntax
 
 ```sh
-ibmcloud schematics policy create --name POLICY_NAME --kind POLICY_KIND --location LOCATION [--description DESCRIPTION] --resource-group RESOURCE_GROUP [--tags TAGS] [--file FILE] [--output OUTPUT] [--no-prompt]
+ibmcloud schematics policy create --name POLICY_NAME --kind POLICY_KIND --location LOCATION [--description DESCRIPTION] --resource-group RESOURCE_GROUP [--tags TAGS] [--target-file FILE] [--output OUTPUT] [--no-prompt]
 ```
 {: pre}
 
@@ -1208,13 +1210,13 @@ Command options
 
 | Flag | Required / Optional |Description |
 | ----- | -------- | ------ |
-| `--name` or `-n` | Required | The unique name of the agent. |
+| `--name` or `-n` | Required | The unique name of the policy. |
 | `--kind` or `-K` | Policy kind for managing and deriving policy decision. Supported is `agent_assignment_policy`. |
-| `--location` or `-l` | Optional | Geographic locations supported by {{site.data.keyword.bpshort}} service. For example, `us-south`, `us-east`, `eu-de`, `eu-gb`. Jobs are picked up from this location for processing. |
-| `--description` or `-d` | Optional |  The description of {{site.data.keyword.bpshort}} customization policy. |
+| `--location` or `-l` | Optional | Geographic location of {{site.data.keyword.bpshort}} service where the agent is defined. For example, `us-south`, `us-east`, `eu-de`, `eu-gb`. Jobs are picked up from this location for processing. |
+| `--description` or `-d` | Optional |  The description of the {{site.data.keyword.bpshort}} policy. |
 | `--resource-group` or `-r` | Required | Resource group name or ID for the policy. |
-| `--tags` or `-t`| Optional | Policy tags can be used multiple times and search the agent related resources faster. |
-| `--file` or `f` | Optional | Path to the JSON file containing the definition of the policy. |
+| `--tags` or `-t`| Optional | Tags can be used multiple times to search for and locate agent policies faster. |
+| `--target-file` or `tf` | Optional | Path to the JSON file containing the definition of the policy. |
 | `--output` or `-o` | Optional | Specify output format, only `JSON` is supported. |
 | `--no-prompt` | Optional |  Set this flag to run the command without user prompts. |
 {: caption="{{site.data.keyword.bpshort}} policy create flags" caption-side="bottom"}
@@ -1222,7 +1224,7 @@ Command options
 #### Using the payload file
 {: #policy-create-payload}
 
-You can provide a payload file to specify certain parameters for the `policy create` command. Then, you pass the file name to the command by using the `--file` command option.
+You can provide a payload file to specify certain parameters for the `policy create` command. Then, you pass the file name to the command by using the `--target-file` command option.
 {: shortdesc}
 
 You need to replace the `<...>` placeholders with the actual values. For example, `"<SELECTOR_KIND>"` as `"ids"`.
@@ -1232,13 +1234,13 @@ Syntax
 
 ```json
 {
-	"policy_target": {
+	"target": {
 		"selector_kind": "<SELECTOR_KIND>",
 		"selector_ids": [
 			"<SELECTOR_ID>"
 		]
 	},
-	"policy_parameter": {
+	"parameter": {
 		"agent_assignment_policy_parameter": {
 			"selector_kind": "<SELECTOR_KIND>",
 			"selector_scope": [{
@@ -1264,13 +1266,13 @@ Example
 
 ```json
 {
-	"policy_target": {
+	"target": {
 		"selector_kind": "ids",
 		"selector_ids": [
 			"demo-agent-one"
 		]
 	},
-	"policy_parameter": {
+	"parameter": {
 		"agent_assignment_policy_parameter": {
 			"selector_kind": "scoped",
 			"selector_scope": [{
@@ -1293,7 +1295,7 @@ Example
 {: codeblock}
 
 ```sh
-ibmcloud schematics policy create --name policy-101 --kind agent_assignment_policy --location us-south --resource-group Default -f policy.json
+ibmcloud schematics policy create --name policy-101 --kind agent_assignment_policy --location us-south --resource-group Default --target-file policy.json
 ```
 {: pre}
 
@@ -1363,7 +1365,7 @@ Update the information of an existing policy by using policy ID. Changes are app
 Syntax
 
 ```sh
-ibmcloud schematics policy update --id POLICY_ID --kind POLICY_KIND --location LOCATION [--description DESCRIPTION] --resource-group RESOURCE_GROUP [--tags TAGS] [--file FILE] [--output OUTPUT] [--no-prompt]
+ibmcloud schematics policy update --id POLICY_ID --kind POLICY_KIND --location LOCATION [--description DESCRIPTION] --resource-group RESOURCE_GROUP [--tags TAGS] [--target-file FILE] [--output OUTPUT] [--no-prompt]
 ```
 {: pre}
 
@@ -1374,8 +1376,8 @@ ibmcloud schematics policy update --id POLICY_ID --kind POLICY_KIND --location L
 |   `--location` or `-l` | Optional | Geographic locations supported by {{site.data.keyword.bpshort}} service. For example, `us-south`, `us-east`, `eu-de`, `eu-gb`. Jobs are picked up from this location for processing. |
 |   `--description` or `-d` | Optional |  The description of {{site.data.keyword.bpshort}} customization policy. |
 |   `--resource-group` or `-r` | Optional |  Resource group name or ID for the policy. |
-|   `--tags` or `-t` | Optional |     Policy tags. This flag can be used multiple times and search the agent related resources faster. |
-|   `--file` or `-f`  | Optional |    Path to the JSON file containing the definition of the policy. |
+|   `--tags` or `-t` | Optional |     Policy tags. This flag can be used multiple times to search for and locate agent policies faster. |
+|   `--target-file` or `-tf`  | Optional |    Path to the JSON file containing the definition of the policy. |
 |   `--output` or `-o`  | Optional |  Specify output format, only `JSON` is supported. |
 |   `--no-prompt`  | Optional |       Set this flag to stop interactive CLI session, such as prompting user for input a field value on terminal. |
 {: caption="{{site.data.keyword.bpshort}} policy update flags" caption-side="top"}
@@ -2504,21 +2506,23 @@ ibmcloud schematics resource-query  update  --id us-east.INVENTORY.inventory1231
 ## Stop commands
 {: #stop-cmds}
 
-After invoking a job on a {{site.data.keyword.bpshort}} Workspaces like a `plan`, an `apply`, or a `destroy`. You may want to stop the running job, or want to stop provisioning resources. Stopping, or cancel a job helps you to know whether the job is stuck, does the job has lot of wait time? {{site.data.keyword.bpshort}} allows users to `force-stop`, `interrupt`, or `terminate` the running job. 
+After invoking a Workspaces job, like a `plan`, an `apply`, or a `destroy`, you may want to stop the running job, or to stop the provisioning of resources. When stopping, or canceling a long running job, it is advisable to first check the job logs to determine whether the job is actually stuck and needs stopping, or if it is performing long running operations that are taking time to complete. 
+
+{{site.data.keyword.bpshort}} provides a number of options to allows users to `(gracefully) stop`, `force-stop`, or `terminate` the running job in order of immediacy and impact of the stop operation. 
 {: shortdesc}
 
-Review the commands to `force-stop`, `interrupt`, or `terminate` job stop command.
+Review the commands to `(gracefully) stop`, `force-stop` or `terminate` jobs. 
 
 ### `ibmcloud schematics workspace job stop`
 {: #schematics-stop-job}
 
-Stops a running action or a job in {{site.data.keyword.bplong_notm}} Workspaces.
+Stops a running action or a job in {{site.data.keyword.bplong_notm}} Workspaces by sending and interrupt signal to Terraform to 
 {: shortdesc}
 
 Syntax
 
 ```sh
-ibmcloud schematics workspace job stop --id WORKSPACE_ID --job-id JOB_ID [--cancel] [--force-stop] [--terminate]
+ibmcloud schematics workspace job stop --id WORKSPACE_ID --job-id JOB_ID [--stop] [--force-stop] [--terminate]
 ```
 {: pre}
 
@@ -2528,7 +2532,7 @@ Command options
 | ----- | -------- | ------ |
 | `--id` or `-i` | Required | The workspace ID to update. |
 | `--job-id` or `--jid` | Required | The job ID of the job. |
-| `--interrupt,` | Optional | Removes the job from the pending queue.|
+| `--stop,` | Optional | Removes the job from the pending queue.|
 | `--force-stop` or `--fs` | Optional | Sends a kill signal to the Terraform execution in the engine, also attempts to immediately stop the execution. |
 | `--terminate` or `-t` | Optional | Abruptly kills the engine, marks the job as stopped, and unlocks your workspace. Data is not saved using this flag. |
 {: caption="{{site.data.keyword.bpshort}} job stop flags" caption-side="bottom"}
@@ -2536,12 +2540,12 @@ Command options
 Example
 
 ```sh
-ibmcloud schematics workspace job stop --id <WORKSPACE_ID> --force-stop --job-id <JOB_ID>
+ibmcloud schematics workspace job stop --id <WORKSPACE_ID> --stop --job-id <JOB_ID>
 ```
 {: pre}
 
 ```sh
-ibmcloud schematics workspace job stop --id <WORKSPACE_ID> --interrupt --job-id <JOB_ID>
+ibmcloud schematics workspace job stop --id <WORKSPACE_ID> --force-stop --job-id <JOB_ID>
 ```
 {: pre}
 
@@ -2680,8 +2684,6 @@ Syntax
 ibmcloud schematics state pull --id WORKSPACE_ID --template TEMPLATE_ID
 ```
 {: pre}
-
-
 
 Command options
 
@@ -2969,7 +2971,7 @@ ibmcloud schematics workspace list --limit 10 --offset 20 --json
 ### `ibmcloud schematics workspace new`
 {: #schematics-workspace-new}
 
-Create an {{site.data.keyword.bpshort}} Workspaces that points to your Terraform template in GitHub or GitLab. If you want to provide your Terraform template by uploading a tape archive file (`.tar`), you can create the workspace without a connection to a GitHub repository and then use the [`ibmcloud schematics workspace upload`](/docs/schematics?topic=schematics-schematics-cli-reference#schematics-workspace-upload) command to provide the template.
+Create a {{site.data.keyword.bpshort}} Workspaces that points to your Terraform template in GitHub or GitLab. If you want to provide your Terraform template by uploading a tape archive file (`.tar`), you can create the workspace without a connection to a GitHub repository and then use the [`ibmcloud schematics workspace upload`](/docs/schematics?topic=schematics-schematics-cli-reference#schematics-workspace-upload) command to provide the template.
 
 {{site.data.keyword.bpshort}} does not support passing `.tar` file to create a workspace.
 {: important}
@@ -2995,7 +2997,7 @@ Command options
 | Flag | Required / Optional |Description |
 | ----- | -------- | ------ |
 | `--file` or `-f` | Optional | The relative path to a JSON file on your local machine that is used to configure your workspace. For more information about the sample JSON file with the details, see [JSON file create template](/docs/schematics?topic=schematics-schematics-cli-reference#json-file-create-template).|
-| `--state` | Optional | The relative path to an existing Terraform state file on your local machine. To create the Terraform state file: **1.** Show the content of an existing Terraform state file by using the [`ibmcloud schematics state pull`](/docs/schematics?topic=schematics-schematics-cli-reference#state-pull) command. **2.** Copy the content of the state file from your command-line output in to a file on your local machine that is named `terraform.tfstate`. **3.** Use the relative path to the file in the `--state` command parameter.|
+| `--state` | Optional | The relative path to an existing Terraform state file on your local machine. To create the Terraform state file: **1.** Show the content of an existing Terraform state file by using the [`ibmcloud schematics state pull`](/docs/schematics?topic=schematics-schematics-cli-reference#state-pull) command. **2.** Copy the content of the state file from your command-line output in to a file on your local machine that is named `terraform.tfstate`. **3.** Use the relative path to the file in the `--state` command parameter. **Note** The {{site.data.keyword.bpshort}} Workspace supports the `terraform.tfstate` file size of less than 2 MB.|
 | `--github-token` or `-g` | Optional |  Enter the functional personal access tokens for HTTPS Git operations. For example, `--github-token ${FUNCTIONAL_GIT_KEY}`.|
 | `--agent-id` or `--aid` | Optional | **New** ID of the Agent to bind your new workspace. Agents help you to run your workspace jobs on your infrastructure. For more information, see [{{site.data.keyword.bpshort}} Agents](/docs/schematics?topic=schematics-agents-intro).|
 | `--output` or `-o` | Optional | Returns the command-line output in JSON format. Currently only `JSON` file format is supported. |
@@ -3170,7 +3172,7 @@ You need to replace the `<...>` placeholders with the actual values. For example
 
 | Parameter | Required / Optional | Description |
 | -- | -- | -- |
-| `workspace_name` | Optional | Enter a name for your workspace. The maximum length of character limit is set to 1 MB. For more information, see [Designing your workspace structure](/docs/schematics?topic=schematics-workspace-setup#structure-workspace).|
+| `workspace_name` | Optional | Enter a name for your workspace. The maximum length of character limit is set to less than 1 MB. For more information, see [Designing your workspace structure](/docs/schematics?topic=schematics-workspace-setup#structure-workspace).|
 | `terraform_version` | Optional | The Terraform version that you want to use to run your Terraform code. Enter `terraform_v1.1` to use Terraform version 1.1,`terraform_v1.0` to use Terraform version 1.0, and similarly, `terraform_v0.15`, `terraform_v0.14`, `terraform_v0.13`, `terraform_v0.12`. For example, when you specify `terraform_v1.1` means users can have template that are of Terraform `v1.1.0`, `v1.1.1`, or `v1.1.2`, so on. Make sure that your Terraform config files are compatible with the Terraform version that you specify. This is a required variable. If the Terraform version is not specified, By default, {{site.data.keyword.bpshort}} selects the version from your template. {{site.data.keyword.bpshort}} supports `Terraform_v1.x` and also plans to make releases available after `30 to 45 days` of HashiCorp Configuration Language (HCL) release. |
 | `location` | Optional | Enter the location where you want to create your workspace. The location determines where your {{site.data.keyword.bpshort}} Actions run and where your workspace data is stored. If you do not enter a location, {{site.data.keyword.bpshort}} determines the location based on the {{site.data.keyword.cloud_notm}} region that you targeted. To view the region that you targeted, run `ibmcloud target --output json` and look at the `region` field. To target a different region, run `ibmcloud target -r <region>`. If you enter a location, make sure that the location matches the {{site.data.keyword.cloud_notm}} region that you targeted. |
 | `description` | Optional | Enter a description for your workspace. |
@@ -3203,7 +3205,6 @@ ibmcloud schematics workspace new --file example.json
 
 Perform an {{site.data.keyword.cloud_notm}} refresh action against your workspace. A refresh action validates the {{site.data.keyword.cloud_notm}} resources in your account against the state that is stored in the Terraform state file of your workspace. If differences are found, the Terraform state file is updated accordingly. 
 {: shortdesc}
-
 
 Syntax
 
@@ -3672,7 +3673,7 @@ ibmcloud schematics agents unregister --id AGENT_ID
 
 
 ### `ibmcloud schematics agents update`
-{: #schematics-agent-update}
+{: #schematics-agents-update}
 
 Updates the {{site.data.keyword.bpshort}} Agent.
 
