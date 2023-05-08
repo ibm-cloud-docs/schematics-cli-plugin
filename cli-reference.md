@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-13"
+lastupdated: "2023-05-08"
 
 keywords: schematics command-line reference, schematics commands, schematics command-line, schematics reference, command-line
 
@@ -114,7 +114,7 @@ Command options
 | `--env-file` or `-E`| Optional | The path to a file where you specified all environment variables for an action. Environment variables must be specified as key-value pairs in JSON format. |
 | `--github-token` or `-g` | Optional | The personal access token in GitHub that you want to use to connect to a private GitHub repository. If you want to clone from the Git repository see the [allowed and blocked file extensions](/docs/schematics?topic=schematics-workspaces-faq#clone-file-extension) for cloning.|
 | `--output` or `-o` | Optional | Returns the command-line output in JSON format. Currently only `JSON` file format is supported. |
-| `--file` or `-f` | Required | The path to the JSON payload file containing the definition of the action that you want to create. For more information, see [Using a payload file](/docs/schematics?topic=schematics-schematics-cli-reference#create-action-payload). |
+| `--file` or `-f` | Optional | The path to the JSON payload file containing the definition of the action that you want to create. For more information, see [Using a payload file](/docs/schematics?topic=schematics-schematics-cli-reference#create-action-payload). |
 | `--no-prompt` | Optional | Set this flag to run the command without an interactive mode. |
 {: caption="{{site.data.keyword.bpshort}} Actions create flags" caption-side="top"}
 
@@ -566,7 +566,7 @@ ibmcloud schematics agent list
 ### `ibmcloud schematics agent plan`
 {: #schematics-agent-plan}
 
-Checks for the pre-requisites of the pre-created agent before install. Generates an agent plan by using {{site.data.keyword.bpshort}}. For more information about the steps to use plan command, see [deploying agent](/docs/schematics?topic=schematics-deploy-agent-overview&interface=cli).
+Checks for the prerequisite of the pre-created agent before install. Generates an agent plan by using {{site.data.keyword.bpshort}}. For more information about the steps to use plan command, see [deploying agent](/docs/schematics?topic=schematics-deploy-agent-overview&interface=cli).
 {: shortdesc}
 
 Syntax
@@ -954,7 +954,7 @@ OK
 ### `ibmcloud schematics blueprint delete`
 {: #schematics-blueprint-delete}
 
-Delete a blueprint. A blueprint can only be deleted once all resources have been destroyed using the `destroy` command and workspaces are in `Inactive` state. For more information about the difference between destroy and delete command, see [Deleting a workspace](/docs/schematics?topic=schematics-workspace-setup&interface=ui#del-workspace).
+Delete a blueprint. A blueprint can only be deleted once all resources have been destroyed using the `destroy` command and workspaces are in `Inactive` state. For more information about the difference between destroy and delete command, see [Deleting a workspace](/docs/schematics?topic=schematics-sch-delete-wks&interface=ui).
 {: shortdesc}
 
 Syntax
@@ -2026,7 +2026,7 @@ ibmcloud schematics job list --resource-type action --id us-south.ACTION.interac
 ### `ibmcloud schematics job logs`
 {: #schematics-logs-job}
 
-Retrieve the detailed logs of a job that ran for your {{site.data.keyword.bpshort}} action. For more information about viewing job queue logs, see [Reviewing the {{site.data.keyword.bpshort}} job details](/docs/schematics?topic=schematics-workspace-setup#job-logs).
+Retrieve the detailed logs of a job that ran for your {{site.data.keyword.bpshort}} action. For more information about viewing job queue logs, see [Reviewing the {{site.data.keyword.bpshort}} job details](/docs/schematics?topic=schematics-interrupt-job#sch-job-logs).
 {: shortdesc}
 
 Syntax
@@ -2097,7 +2097,7 @@ Scan and run the infrastructure code of your Terraform template that your worksp
 {{site.data.keyword.bplong_notm}} supports 50 API requests per minute, per host, and per customer. The host can be `us-east`, `us-south`, `eu-gb`, or `eu-de` region. You need to wait before calling the command again.
 {: shortdesc}
 
-Your workspace must be in an **Inactive**,  **Active**, **Failed**, or **Stopped** state to perform a {{site.data.keyword.bpshort}} apply action. For more information about workspace state, see [workspace state diagram](/docs/schematics?topic=schematics-workspace-setup#workspace-state-diagram).
+Your workspace must be in an **Inactive**,  **Active**, **Failed**, or **Stopped** state to perform a {{site.data.keyword.bpshort}} apply action. For more information about workspace state, see [workspace state diagram](/docs/schematics?topic=schematics-wks-state&interface=ui#workspace-state-diagram).
 {: note}
 
 While your infrastructure code runs in {{site.data.keyword.bplong_notm}}, you cannot make any changes to your workspace.
@@ -3165,7 +3165,7 @@ You need to replace the `<...>` placeholders with the actual values. For example
 
 | Parameter | Required / Optional | Description |
 | -- | -- | -- |
-| `workspace_name` | Optional | Enter a name for your workspace. The maximum length of character limit is set to less than 1 MB. For more information, see [Designing your workspace structure](/docs/schematics?topic=schematics-workspace-setup#structure-workspace).|
+| `workspace_name` | Optional | Enter a name for your workspace. The maximum length of character limit is set to less than 1 MB. For more information, see [Designing your workspace structure](/docs/schematics?topic=schematics-workspaces-plan#structure-workspace).|
 | `terraform_version` | Optional | The Terraform version that you want to use to run your Terraform code. Enter `terraform_v1.1` to use Terraform version 1.1,`terraform_v1.0` to use Terraform version 1.0, and similarly, `terraform_v0.15`, `terraform_v0.14`, `terraform_v0.13`, `terraform_v0.12`. For example, when you specify `terraform_v1.1` means users can have template that are of Terraform `v1.1.0`, `v1.1.1`, or `v1.1.2`, so on. Make sure that your Terraform config files are compatible with the Terraform version that you specify. This is a required variable. If the Terraform version is not specified, By default, {{site.data.keyword.bpshort}} selects the version from your template. {{site.data.keyword.bpshort}} supports `Terraform_v1.x` and also plans to make releases available after `30 to 45 days` of HashiCorp Configuration Language (HCL) release. |
 | `location` | Optional | Enter the location where you want to create your workspace. The location determines where your {{site.data.keyword.bpshort}} Actions run and where your workspace data is stored. If you do not enter a location, {{site.data.keyword.bpshort}} determines the location based on the {{site.data.keyword.cloud_notm}} region that you targeted. To view the region that you targeted, run `ibmcloud target --output json` and look at the `region` field. To target a different region, run `ibmcloud target -r <region>`. If you enter a location, make sure that the location matches the {{site.data.keyword.cloud_notm}} region that you targeted. |
 | `description` | Optional | Enter a description for your workspace. |
@@ -3310,7 +3310,7 @@ Command options
 | `--id` or `-i` | Required |  The unique identifier of the workspace for which you want to re-create the instance or resource. To find the ID of your workspace, run `ibmcloud schematics workspace list` command.|
 | `--options` or `-o` | Optional | Enter the option flag that you want to show. |
 | `--address` or `-adr` | Optional | Enter the address of the resource to mark as untaint.|
-{: caption="{{site.data.keyword.bpshort}} Workspaces untaint flags" caption-side="top"}
+{: caption="{{site.data.keyword.bpshort}} Workspaces `untaint` flags" caption-side="top"}
 
 Example
 
@@ -3413,7 +3413,7 @@ You need to replace the `<...>` placeholders with the actual values. For example
 
 | Parameter | Required / Optional | Description |
 | --- | --- | --- |
-| `name` | Optional | Enter a name for your workspace. For more information, see [Designing your workspace structure](/docs/schematics?topic=schematics-workspace-setup#structure-workspace). If you update the name of the workspace, the ID of the workspace does not change. |
+| `name` | Optional | Enter a name for your workspace. For more information, see [Designing your workspace structure](/docs/schematics?topic=schematics-workspaces-plan#structure-workspace). If you update the name of the workspace, the ID of the workspace does not change. |
 | `type` | Optional | The Terraform version that you want to use to run your Terraform code. Enter `Terraform_v1.1` to use Terraform version 1.1, `Terraform_v1.0` to use Terraform version 1.0, and similarly, `terraform_v0.15`, `terraform_v0.14`, `terraform_v0.13`, `terraform_v0.12`. For example, when you specify `terraform_v1.1` means users can have template that are of Terraform `v1.1.0`, `v1.1.1`, or `v1.1.2`, so on. Make sure that your Terraform config files are compatible with the Terraform version that you specify. This is a required variable. If the Terraform version is not specified, By default, {{site.data.keyword.bpshort}} selects the version from your template. |
 | `description` | Optional | Enter tags that you want to associate with your workspace. Tags can help you find your workspace faster. |
 | `resource_group` | Optional | Enter the resource group where you want to provision your workspace. |
@@ -3719,7 +3719,7 @@ ibmcloud schematics workspace new  --file FILE_NAME  --state STATE_FILE_PATH
 {: pre}
 
 ### `ibmcloud schematics workspace get with Agent`
-{: #schematics-agent-get}
+{: #schematics-agent-wks-get}
 
 Retrieve the details of an existing workspace, including the values of all input variables and {{site.data.keyword.bpshort}} Agent.	
 {: shortdesc}
