@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-09-12"
+lastupdated: "2023-09-21"
 
 keywords: schematics command-line reference, schematics commands, schematics command-line, schematics reference, command-line
 
@@ -3692,7 +3692,7 @@ The table provides the list of key parameters of the JSON file for the `Commands
 | ------ | -------- | ---------- |
 |`command`| Required |Provide the command. Supported commands are `show`,`taint`, `untaint`, `state`, `import`, `output`.|
 |`command_params`| Required | The address parameters for the command name for `CLI`, such as resource name, absolute path of the file name. For API, you have to send option flag and address parameter in `command_params`.|
-|`command_name`| Optional | The name for the command block.|
+|`command_name`| Required | The name for the command block.|
 |`command_desc`| Optional | The text to describe the command block.|
 |`command_onError`| Optional |  Instruction to continue or break in case of error in the command. |
 |`command_dependsOn`|Optional| Dependency on the previous commands.|
