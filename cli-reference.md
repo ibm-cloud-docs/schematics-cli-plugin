@@ -2,11 +2,11 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-09-26"
+lastupdated: "2023-09-27"
 
 keywords: schematics command-line reference, schematics commands, schematics command-line, schematics reference, command-line
 
-subcollection: schematics
+subcollection: schematics-cli-plugin
 
 ---
 
