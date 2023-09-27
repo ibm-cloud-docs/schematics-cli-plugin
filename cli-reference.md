@@ -3705,3 +3705,5 @@ Example
 ibmcloud schematics workspace commands --id cli-sleepy-0bedc51f-c344-50 --file /<FILE_PATH>/Test.JSON
 ```
 {: pre}
+
+	
