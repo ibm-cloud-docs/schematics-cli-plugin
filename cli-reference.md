@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-02-22"
+lastupdated: "2024-03-05"
 
 keywords: schematics command-line reference, schematics commands, schematics command-line, schematics reference, command-line
 
@@ -615,14 +615,14 @@ Command options
 | Flag | Required / Optional |Description |
 | ----- | -------- | ------ |
 | `--name` or `-n` | Required | The unique name of an agent. Must be descriptive of the agent role, location and usage.  |
-| `--location` or `-l` | Required | The {{site.data.keyword.bpshort}} location where the agent will be defined, `us-south`, `us-east`, `eu-de`, `eu-gb`. Jobs are picked up from this location for execution. |
+| `--location` or `-l` | Required | The {{site.data.keyword.bpshort}} location where the agent are defined, `us-south`, `us-east`, `eu-de`, `eu-gb`. Jobs are picked up from this location for execution. |
 | `--agent-location` or `--al` | Required | A descriptive user defined label to identify where the agent is deployed in the user environment. This could be a Cloud region or a user data center.  For example, `London MZR`. |
 | `--cluster-id` or `-c` | Required | The ID of the Kubernetes cluster for deploying an Agent.|
 | `--cluster-resource-group` or `--cg` | Required | The name of the clusters' resource group. |
 | `--cos-instance-name` or `--on` | Required | The name of the COS instance. |
 | `--cos-bucket` or `-b` | Required |  The ID or the name of the COS bucket. |
 | `--cos-location` or `--ol` | Required |  The COS bucket location. Supported format are `eu-gb`, `us-south`, so on. |
-| `--resource-group` or `-g` | Required | Resource group name or ID the agent will be associated with. |
+| `--resource-group` or `-g` | Required | Resource group name or ID the agent are associated with. |
 | `--version` or `-v` | Required | A user defined label specifying the version of the agent. Example `v1.0.0` |
 | `--infra-type` or `-i` | Required | Specify the type of the target agent infrastructure. Supported values are `ibm-kubernetes`, `ibm-openshift`, or `ibm-satellite`.|
 | `--description` or `-d` | Optional | A description that identifies the agent usage, and the network zones and resources the agent is able to access. |
@@ -849,7 +849,7 @@ ibmcloud schematics agent validate --id AGENT_ID
 ## Agents policy commands
 {: #policy-cmd}
 
-{{site.data.keyword.bpshort}} (assignment) policies tell {{site.data.keyword.bpshort}} which agent it should use to execute workspace and action jobs in a specific network zone. Each agent will have at least one policy associated with it to identify the jobs to run in the agents' location. See [assignment policies](/docs/schematics?topic=schematics-policy-manage&interface=cli).
+{{site.data.keyword.bpshort}} (assignment) policies tell {{site.data.keyword.bpshort}} which agent it should use to execute workspace and action jobs in a specific network zone. Each agent have at least one policy associated with it to identify the jobs to run in the agents' location. See [assignment policies](/docs/schematics?topic=schematics-policy-manage&interface=cli).
 {: shortdesc}
 
 ### `ibmcloud schematics policy create`
@@ -1864,7 +1864,7 @@ ibmcloud schematics workspace import --id WID --address ibm_iam_access_group.acc
 ### `ibmcloud schematics workspace list`	
 {: #schematics-workspace-list}
 
-List the workspaces for the current region of your {{site.data.keyword.cloud_notm}} account and optionally, show the details for your workspace.	
+List the workspaces for the current region of your {{site.data.keyword.cloud_notm}} account and shows the details for your workspace. List workspace checks for the depreciation in a loop by invoking `versions` API every time for all the workspace through file cache.
 
 Syntax
 
@@ -1905,8 +1905,11 @@ Create a {{site.data.keyword.bpshort}} workspace that points to your Terraform t
 To create a workspace, you can specify your workspace settings in a JSON file. Make sure that the JSON file follows the structure as outlined in this command. Also ensure the `location` and the `url` endpoint are pointing to the same region when you create or update workspaces and actions. For more information about location and endpoint, see [Where is my information stored?](/docs/schematics?topic=schematics-secure-data#pi-location).
 {: note}
 
-{{site.data.keyword.bplong_notm}} deprecates older version of Terraform. For more information, see [Deprecating older version of Terraform process in {{site.data.keyword.bplong_notm}}](/docs/schematics?topic=schematics-deprecate-tf-version).
+{{site.data.keyword.bplong_notm}} deprecates older version of Terraform. For more information, see [Deprecating older version of Terraform process in {{site.data.keyword.bplong_notm}}](/docs/schematics?topic=schematics-deprecate-tf-version#deprecate-timeline).
 {: deprecated}
+
+{{site.data.keyword.bplong_notm}} deprecates creation of workspace using the {{site.data.keyword.terraform-provider_full_notm}} v1.2, v1.3, v1.4 template from 2nd week of April 2024.
+{: important}
 
 Syntax
 
@@ -1927,7 +1930,7 @@ Command options
 | `--json` or `-j` | Deprecated | Prints the output in the JSON format. |
 {: caption="{{site.data.keyword.bpshort}} workspace create flags" caption-side="top"}
 
-The {{site.data.keyword.bpshort}} `ibmcloud terraform` command usage displays warning and deprecation message as **Alias 'terraform' will be deprecated. Use 'schematics' or 'sch' in your commands.**
+The {{site.data.keyword.bpshort}} `ibmcloud terraform` command usage displays warning and deprecation message as **Alias 'terraform' are deprecated. Use 'schematics' or 'sch' in your commands.**
 {: note}
 
 #### Create file template in JSON format
@@ -2104,7 +2107,7 @@ You need to replace the `<...>` placeholders with the actual values. For example
 | `template_repo.datafolder` | Optional | Enter the name of the folder in the Git repository, that contains the template. |
 | `template_repo.release` | Optional | Enter the GitHub or GitLab release that points to your Terraform configuration files. |
 | `github_source_repo_url` | Optional | Enter the link to your GitHub repository. The link can point to the `master` branch, a different branch, or a subdirectory. If you choose to create your workspace without a GitHub repository, your workspace is created with a **draft** state. To connect your workspace to a GitHub repository later, you must use the `ibmcloud schematics workspace update` command. If you plan to provide your Terraform template by uploading a tape archive file (`.tar`), leave the URL empty, and use the [ibmcloud schematics workspace upload](/docs/schematics?topic=schematics-schematics-cli-reference#schematics-workspace-upload) command after you created the workspace. If you want to clone from the Git repository see the [allowed and blocked file extensions](/docs/schematics?topic=schematics-general-faq#clone-file-extension) for cloning. |
-| `env_values` | Optional | A list of environment variables that you want to apply during the execution of a bash script or Terraform action. This field must be provided as a list of key-value pairs. Each entry will be a map with one entry where `key = variable name` and `value = value`. You can define environment variables for {{site.data.keyword.cloud_notm}} catalog offerings that are provisioned by using a bash script files. |
+| `env_values` | Optional | A list of environment variables that you want to apply during the execution of a bash script or Terraform action. This field must be provided as a list of key-value pairs. Each entry is a map with one entry where `key = variable name` and `value = value`. You can define environment variables for {{site.data.keyword.cloud_notm}} catalog offerings that are provisioned by using a bash script files. |
 | `variable_name` | Optional | Enter the name for the input variable that you declared in your Terraform configuration files. |
 | `variable_type` | Optional | `Terraform v0.12` supports `string`, `list`, `map`, `bool`, `number` and complex data types such as `list(type)`, `map(type)`, `object({attribute name=type,..})`, `set(type)`, `tuple([type])`. |
 | `variable_value` | Optional | Enter the value as a string for the primitive types such as `bool`, `number`, `string`, and `HCL` format for the complex variables, as you provide in a `.tfvars` file. You need to enter escaped string of `HCL` format for the value, as shown in the example. For more information about how to declare variables in a Terraform configuration file and provide value to schematics, see [Using input variables to customize resources](/docs/schematics?topic=schematics-create-tf-config#declare-variable). [For example](/docs/schematics?topic=schematics-schematics-cli-reference#syntax_of_variablevalue)|
@@ -2187,7 +2190,7 @@ ibmcloud schematics state list --id myworkspace-a1aa1a1a-a11a-11
 ### `ibmcloud schematics workspace taint`
 {: #schematics-workspace-taint}
 
-Manually marks an instance or resources as tainted, by forcing the resources to be re-created on the next apply. Taint modifies the state file, but not the infrastructure in your workspace. When you perform next plan the changes will display as re-created, and in the next apply the change is implemented.
+Manually marks an instance or resources as tainted, by forcing the resources to be re-created on the next apply. Taint modifies the state file, but not the infrastructure in your workspace. When you perform next plan the changes displays as re-created, and in the next apply the change is implemented.
 {: shortdesc}
 
 You must execute [`ibmcloud schematics state list`](/docs/schematics?topic=schematics-schematics-cli-reference#state-list) command to view the tainted status of your resources. `Taint Status` returns **tainted** for (true) or **blank** for (false).
@@ -2220,7 +2223,7 @@ ibmcloud schematics workspace taint --id myworkspace-lalalalalalala-11 --address
 ### `ibmcloud schematics workspace untaint`
 {: #schematics-workspace-untaint}
 
-Manually marks an instance or resources as untainted, by forcing the resources to be restored on the next apply. When you perform next plan the changes will show as restored and in the next apply the change is implemented.
+Manually marks an instance or resources as untainted, by forcing the resources to be restored on the next apply. When you perform next plan the changes shows as restored and in the next apply the change is implemented.
 {: shortdesc}
 
 You can execute [`ibmcloud schematics state list`](/docs/schematics?topic=schematics-schematics-cli-reference#state-list) command to view the tainted status of your resources. `Taint Status` returns **tainted** for (true) or **blank** for (false).
@@ -2252,7 +2255,7 @@ ibmcloud schematics workspace untaint --id myworkspace-asdff1a1a-42145-11 --addr
 ### `ibmcloud schematics workspace update`
 {: #schematics-workspace-update}
 
-{{site.data.keyword.bplong_notm}} deprecates older version of Terraform. For more information, see [Deprecating older version of Terraform process in {{site.data.keyword.bplong_notm}}](/docs/schematics?topic=schematics-deprecate-tf-version).
+{{site.data.keyword.bplong_notm}} deprecates older version of Terraform. For more information, see [Deprecating older version of Terraform process in {{site.data.keyword.bplong_notm}}](/docs/schematics?topic=schematics-deprecate-tf-version#deprecate-timeline).
 {: deprecated}
 
 Update the details for an existing workspace, such as the workspace name, variables, or source control URL. To provision or modify {{site.data.keyword.cloud_notm}}, see the [`ibmcloud schematics plan`](/docs/schematics?topic=schematics-schematics-cli-reference#schematics-plan) command.
@@ -2355,8 +2358,8 @@ You need to replace the `<...>` placeholders with the actual values. For example
 | `github_source_repo_url` | Optional | Enter the link to your GitHub repository. The link can point to the `master` branch, a different branch, or a subdirectory. |
 | `template_data.folder` | Optional | Enter the name for the input variable that you declared in your Terraform configuration files. |
 | `template_data.type` | Optional | Enter the name for the input variable type that you declared in your Terraform configuration files. |
-| `template_data[0].env_values[i].va11` | Optional | A list of environment variables that you want to apply during the execution of a bash script or Terraform job. This field must be provided as a list of key-value pairs, for example, `TF_LOG=debug`. Each entry will be a map with one entry where **key is the environment variable name and value is value**. |
-| `template_data[0].env_values[i].val2` | Optional | A list of environment variables that you want to apply during the execution of a bash script or Terraform job. This field must be provided as a list of key-value pairs, for example, `TF_LOG=debug`. Each entry will be a map with one entry where **key is the environment variable name and value is value**. |
+| `template_data[0].env_values[i].va11` | Optional | A list of environment variables that you want to apply during the execution of a bash script or Terraform job. This field must be provided as a list of key-value pairs, for example, `TF_LOG=debug`. Each entry is a map with one entry where **key is the environment variable name and value is value**. |
+| `template_data[0].env_values[i].val2` | Optional | A list of environment variables that you want to apply during the execution of a bash script or Terraform job. This field must be provided as a list of key-value pairs, for example, `TF_LOG=debug`. Each entry is a map with one entry where **key is the environment variable name and value is value**. |
 | `template_data[0].env_values_metadata` | Optional | Environment variables metadata. |
 | `template_data[0].variablestore[i].name` | Optional | Enter the name for the input variable that you declared in your Terraform configuration files. |
 | `template_data[0].variablestore[ii].type` | Required | `Terraform v0.12` supports `string`, `list`, `map`, `bool`, `number` and complex data types such as `list(type)`, `map(type)`, `object({attribute name=type,..})`, `set(type)`, `tuple([type])`.|
@@ -2392,7 +2395,7 @@ ibmcloud schematics workspace update --id myworkspace-a1aa1a1a-a11a-11 --file my
 ### `ibmcloud schematics workspace upload`
 {: #schematics-workspace-upload}
 
-Provide your Terraform template by uploading a tape archive file (`.tar`) to your {{site.data.keyword.bpshort}} workspace.
+Provide your Terraform template by uploading a tape archive file (`.tar`) to your {{site.data.keyword.bpshort}} workspace. The `.tar` supports the Cloud Shell commands.
 {: shortdesc}
 
 Before you begin, make sure that you [created your workspace](/docs/schematics?topic=schematics-schematics-cli-reference#schematics-workspace-new) without a link to a GitHub or GitLab repository.
@@ -2404,7 +2407,6 @@ Syntax
 ibmcloud schematics workspace upload  --id WORKSPACE_ID --file FILE_NAME --template TEMPLATE_ID [--output OUTPUT][--json]
 ```
 {: pre}
-
 
 
 Command options
@@ -2452,7 +2454,7 @@ Run {{site.data.keyword.bpshort}} operations, to create, update, and delete {{si
 ### `ibmcloud schematics apply`
 {: #schematics-apply}
 
-When you apply a workspace Terraform template, your resources are provisioned, modified, or removed from {{site.data.keyword.cloud_notm}}. Temporary files created during the apply operation can be [persisted](/docs/schematics?topic=schematics-general-faq#persist-file) (saved) for future operations.  
+When you apply a workspace Terraform template, your resources are provisioned, modified, or removed from {{site.data.keyword.cloud_notm}}. Temporary files created during the apply operation can be [persisted](/docs/schematics?topic=schematics-general-faq#persist-file) for future operations.  
 {: shortdesc}
 
 Your workspace must be in an **Inactive**,  **Active**, **Failed**, or **Stopped** state to perform a {{site.data.keyword.bpshort}} apply operation. For more information about workspace states, see [workspace state diagram](/docs/schematics?topic=schematics-wks-state#workspace-state-diagram).
@@ -2751,7 +2753,7 @@ ibmcloud schematics workspace show --id myworkspace-a1aa1a1a-a11a-11 --address n
 ### `ibmcloud schematics workspace state mv`
 {: #schematics-wks_statemv}
 
-Moves the record of an instance or resource within the Terraform state file. If you move the state for a resource within the state file, the {{site.data.keyword.bpshort}} workspace will continue to function, but the next plan or apply operation will not find the resource in this state file. If no changes have been make to the template this may trigger Terraform to attempt to recreate the resource on the next operation.  
+Moves the record of an instance or resource within the Terraform state file. If you move the state for a resource within the state file, the {{site.data.keyword.bpshort}} workspace continue to function, but the next plan or apply operation do not find the resource in this state file. If no changes have been make to the template this may trigger Terraform to attempt to recreate the resource on the next operation.  
 {: shortdesc}
 {: shortdesc}
 
@@ -2782,7 +2784,7 @@ ibmcloud schematics workspace state mv --id myworkspace-a1aa1a1a-a11a-11 -s test
 ### `ibmcloud schematics workspace state rm`
 {: #schematics-wks_staterm}
 
-Removes the record of an instance or resource from the Terraform state file. If you remove the state for a resource from the state file, the {{site.data.keyword.bpshort}} workspace will continue to function, but the next plan or apply operation will not find the resource in this state file. If no changes have been make to the template this may trigger Terraform to recreate the resource on the next operation.  
+Removes the record of an instance or resource from the Terraform state file. If you remove the state for a resource from the state file, the {{site.data.keyword.bpshort}} workspace continues to function, but the next plan or apply operation do not find the resource in this state file. If no changes have been make to the template this may trigger Terraform to recreate the resource on the next operation.  
 {: shortdesc}
 
 ```sh
